@@ -1,0 +1,37 @@
+<div class="page-title">
+    <h1>Suas listas de presente</h1>
+</div>
+<?php if($this->_getHelper()->getList()){$label = $this->__('Fechar lista');}else{ $label = $this->__('Nova lista'); } ?>
+<div class="box-btn-gift-my">    
+    <button onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/pesquisarlista/') ?>')" class="button btn btn-default pull-right">Buscar listas</button>
+    <button id="criarLista" type="button" onclick="isnewlist()" class="button btn btn-default pull-right"><?php echo $label?></button>
+</div>				   
+<script>
+    function isnewlist(){
+
+    	<?php if(Mage::helper('jbp_giftlist')->getList()):?>
+   	    	var r = confirm("<?php echo $this->__('Tem certeza que deseja criar uma nova lista?A lista atual sera finalizada.')?>");
+   	    	if (r == true) {
+   	    	    txt = "Sim";
+	   	    	 setLocation('<?php echo $this->getUrl('listaCasamento/index/novalista/',array('id'=>$this->_getHelper()->getList())) ?>')
+	   	    	 return;
+   	    	} else {
+   	    	    txt = "Não";
+   	    	    return;
+   	    	}
+    	<?php else:?>
+    		setLocation('<?php echo $this->getUrl('listaCasamento/index/novalista/',array('id'=>$this->_getHelper()->getList())) ?>')
+    	<?php endif;?>
+    }
+</script>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                   
+            <div class="col-lg-12">
+                <?php echo $this->getChildHtml('minhas.listas')?>
+            </div>
+        </div>
+    </div>
+</div>

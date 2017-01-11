@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<HC_Allin>
+			<version>0.1.0</version>
+		</HC_Allin>
+	</modules>	
+	 <frontend>
+	 
+	    <routers>
+	      <hc_allin>
+	        <use>standard</use>
+	        <args>
+	          <module>HC_Allin</module>
+	          <frontName>hcallin</frontName>
+	        </args>
+	      </hc_allin>
+	    </routers>
+	    
+	    <layout>
+	    	<updates>
+	    		<hc_allin>
+	    			<file>hc/allin/integracaoallin.xml</file>
+	    		</hc_allin>
+	    	</updates>
+	    </layout>
+	    	    
+    </frontend>	
+	<adminhtml>
+	    <acl>
+	    	<resources>
+	    		<admin>
+	    			<children>
+	    				<system>
+	    					<children>
+	    						<config>
+	    							<children>	    								
+	    								
+	    								<allin_config>
+	    									<title>E-mails transacionais</title>
+	    								</allin_config>	
+	    								    	
+	    								<allin_trackevent>
+	    									<title>Eventos</title>
+	    								</allin_trackevent>
+	    															
+	    							</children>
+	    						</config>
+	    					</children>
+	    				</system>
+	    			</children>
+	    		</admin>
+	    	</resources>
+	    </acl>	    
+   </adminhtml>   
+	<global>
+		
+		<blocks>
+			<hc_allin>
+				<class>HC_Allin_Block</class>
+			</hc_allin>
+		</blocks>
+		
+		<helpers>
+			<hc_allin>
+				<class>HC_Allin_Helper</class>
+			</hc_allin>
+		</helpers>
+				
+		<models>		
+			<hc_allin>
+				<class>HC_Allin_Model</class>
+			</hc_allin>		
+			<core>
+				<rewrite>
+					<email_template>HC_Allin_Model_Email_Template</email_template>
+				</rewrite>
+			</core>			
+		</models>
+		
+		<events>		   
+		    <send_email_api_allin>
+		      <observers>
+		        <send_email_api_allin_observer>
+		          <type>singleton</type>
+		          <class>HC_Allin_Model_Observer</class>
+		          <method>sendMail</method>
+		        </send_email_api_allin_observer>
+		      </observers>
+		    </send_email_api_allin>
+		</events>		
+	</global>
+</config>

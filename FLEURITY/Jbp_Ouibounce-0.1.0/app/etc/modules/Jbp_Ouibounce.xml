@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	 <modules>
+		  <Jbp_Ouibounce>
+		   		<codePool>local</codePool>
+		   		<active>true</active>
+		  </Jbp_Ouibounce>
+	 </modules>
+</config>

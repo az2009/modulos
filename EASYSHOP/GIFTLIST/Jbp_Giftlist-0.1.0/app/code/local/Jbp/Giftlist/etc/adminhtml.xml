@@ -1,0 +1,55 @@
+<config>
+	<menu>
+    	<sales>
+    		<children>
+                <list_casamento module="jbp_giftlist" translate="title">
+                    <title>Lista de casamento</title>
+                    <sort_order>25</sort_order>
+                    <action>adminhtml/giftlist/index</action>
+                </list_casamento>
+            </children>
+    	</sales>
+    	<promo>
+            <children>
+                <coupon_marriage translate="title" module="jbp_giftlist">
+                    <title>Regras lista de casamento</title>
+                    <action>adminhtml/giftlist/promolistmarriage</action>
+                </coupon_marriage>
+            </children>
+         </promo>
+   	</menu>
+   	 <acl>
+        <resources>
+            <admin>
+                <children>
+                	<system>
+                        <children>
+                            <config>
+                                <children>
+                                    <jbp_giftlist_config module="jbp_giftlist" translate="title">
+                                        <title>Imagem de fundo</title>
+                                        <sort_order>71</sort_order>
+                                    </jbp_giftlist_config>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                	<sales>
+                		<children>
+                			<list_casamento translate="title">
+                				<title>Lista de casamento</title>
+                			</list_casamento>
+                		</children>                		
+                	</sales>
+                	<promo>
+                		<children>
+	                		<coupon_marriage translate="title">
+	                			<title>Regras lista de casamento</title>
+	                		</coupon_marriage>
+                		</children>
+                	</promo>
+                </children>
+            </admin>
+        </resources>
+     </acl>    
+</config>

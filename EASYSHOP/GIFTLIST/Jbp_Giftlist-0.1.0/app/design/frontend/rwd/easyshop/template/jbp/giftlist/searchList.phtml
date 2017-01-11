@@ -1,0 +1,90 @@
+<div class="page-title">
+    <h1>Encontrar lista</h1>
+</div>
+
+<div class="msgajax"></div>
+<div class="container-fluid">
+<form id="formList">
+    <div class="row box-row-gift">
+    
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 rp-min rp-max">
+        	
+        	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            	<input type="text" name="nomeCasal" class="form-control" placeholder="Nome do noivo ou noiva" />
+        	</div>            
+        	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            	<input type="text" id="dataCasamento" name="dataCasamento" class="form-control" placeholder="Data do casamento" />
+        	</div>
+        	<?php echo $this->getChildHtml('search.input.giftlist') ?>           
+        </div>
+        
+                    
+        <div>                	
+    		<button type="submit" class="button btn btn-default pull-right search-list-gift"><?php echo $this->__('Buscar lista de casamento')?></button>        		
+        
+            <?php if(!$this->getCustomer()->isLoggedIn()):?>
+            	<button class="create-list-gift button btn btn-default pull-right" id="modal-create" data-toggle="modal" data-target="#myModal"><?php echo $this->__('Criar lista')?></button>
+        	<?php elseif($this->_getHelper()->getList()): ?>            	
+                <button type="button" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/minhaslistas/')?>')" class="create-list-gift button btn btn-default pull-right"><?php echo $this->__('Minhas listas')?></button>
+            <?php else: ?>
+            	<button type="button" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/')?>')" class="create-list-gift button btn btn-default pull-right"><?php echo $this->__('Criar lista')?></button>
+            <?php endif;?>                
+        </div>   
+              
+    </div>
+    
+</form>
+</div>
+
+<div id="box-result-search"></div>
+
+<script>
+jQuery(function(){
+
+	jQuery("#dataCasamento").datepicker({
+    		dateFormat: 'dd/mm/yy',
+    	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    	    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    	    nextText: 'Próximo',
+    	    prevText: 'Anterior'
+    });
+
+
+	    	jQuery('#formList').submit(function(){
+	  		          var customForm = new VarienForm('formList');
+	    		      if(customForm.validator && customForm.validator.validate()){
+
+		    	            var formData = jQuery('#formList').serialize();
+
+	                		jQuery.ajax({
+	                			url : "<?php echo $this->getUrl('listaCasamento/index/pesquisarListaPost/')?>",
+	                			type: "POST",
+	                			dataType: 'json',
+	                            cache : false,
+	                			data : formData,
+	                			success: function(data){
+	                			     jQuery('#box-result-search').empty();
+	                			     jQuery('#box-result-search').append(data.body);
+	                			},
+	                			error: function (data){}
+	                		});
+	    		     }
+	    		return false;
+	    	});
+
+
+
+});
+</script>
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('formList');
+    //]]>
+</script>
+
+<?php if(!$this->getCustomer()->isLoggedIn()):?>
+	<?php echo $this->getChildHtml('modal_giftlist') ?>
+<?php endif;?>

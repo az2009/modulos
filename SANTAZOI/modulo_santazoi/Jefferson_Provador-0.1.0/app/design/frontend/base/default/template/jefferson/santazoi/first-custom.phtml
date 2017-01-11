@@ -1,0 +1,52 @@
+<?php if(Mage::getStoreConfig('multiproduct/block1/enable')) : ?>
+<?php
+    $tabOptions = Mage::getStoreConfig('multiproduct/block1/multi_option');
+    $displayBlock = false;
+
+    if ($tabOptions != null || $tabOptions != " ") {
+        $displayBlock = true;
+
+	$defaultTabs = array("new","random","rated");
+
+        $tabValue = explode("_",$tabOptions);
+	$filterBy = $tabValue[1];
+	$activeTab = strtolower($filterBy);
+	if(in_array($activeTab,$defaultTabs)) {
+	    $activeTab = "_default_".$activeTab;
+	}
+	else {
+	    $activeTab = "_customlist";
+	}
+    }
+?>
+
+    <?php if($displayBlock && $filterBy != "customblock"): ?>
+	<?php $page = Mage::app()->getLayout()->getBlock('root')->getTemplate();
+	    if ($page == "page/1column.phtml") {
+		$page = 1;
+	    }
+	    elseif ($page == "page/2columns-left.phtml" || $page == "page/2columns-right.phtml") {
+		$page = 2;
+	    }
+	    elseif($page == "page/1column.phtml") {
+		$page = 3;
+	    }
+	    else {
+		$page = 0;
+	    }
+	?>
+		<div class="section-line">
+		    <h2><?php echo $this->__($filterBy.' Products'); ?></h2>
+		</div>
+		<?php if($activeTab == '_default_new'){ ?><div class="new-product"><?php } ?><?php echo $this->getLayout()->createBlock('multiproduct/product'.$activeTab)->setCustomproduct($filterBy)->setCustomBlockId("block1")->setBlockLimitId("1")->setTemplate('jefferson/santazoi/list-features.phtml')->toHtml(); ?><?php if($activeTab == '_default_new'){ ?></div><?php } ?>
+    <?php elseif($displayBlock && $filterBy == "customblock") : ?>
+
+		<?php
+		    $blockId = Mage::getStoreConfig('multiproduct/block1/customblock_first');
+		    if($blockId != "") {
+			echo $this->getLayout()->createBlock('cms/block')->setBlockId($blockId)->toHtml();
+		    }
+		?>
+
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<config>
+	    <tabs>
+	        <jbp_giftlist translate="label">
+	            <label>Lista de casamento</label>
+	            <sort_order>400</sort_order>
+	        </jbp_giftlist>
+	    </tabs>
+	    <sections>
+			<jbp_giftlist_config translate="label" module="jbp_giftlist">
+				<label>Lista de casamento</label>
+				<tab>jbp_giftlist</tab>
+				<frontend_type>text</frontend_type>
+	            <sort_order>1000</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>    
+	            
+	            	<groups translate="label">
+	            		
+	            		<jbp_giftlist_general_config>
+	            			<label>Geral</label>
+	            			<frontend_type>text</frontend_type>
+		                    <sort_order>10</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>   		            
+		                    	<fields>		                    		
+		                    		<enable translate="label comment">
+			                            <label>Habilitar módulo lista de casamento</label>
+			                            <frontend_type>select</frontend_type>
+			                            <sort_order>10</sort_order>
+			                            <source_model>adminhtml/system_config_source_yesno</source_model>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment></comment>
+			                        </enable>	           
+			                        <msg_default translate="label comment">
+			                            <label>Mensagem padrão para parabenizar os noivos</label>
+			                            <frontend_type>textarea</frontend_type>
+			                            <sort_order>20</sort_order>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment>Esta mensagem irá aparecer na textarea "Enviar mensagem para o casal" no checkout</comment>
+			                        </msg_default>	               
+			                       	               
+			                        <email_default_remetente translate="label comment">
+			                            <label>E-mail remetente da loja</label>
+			                            <frontend_type>select</frontend_type>
+			                            <sort_order>30</sort_order>
+			                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment>Selecione o e-mail responsável para disparar os e-mails da loja</comment>
+			                        </email_default_remetente>	                    		
+		                    	</fields>		                    	
+	            		</jbp_giftlist_general_config>
+	            		
+	            		<jbp_giftlist_general_image>
+	            			<label>Imagem de fundo</label>
+	            			<frontend_type>text</frontend_type>
+		                    <sort_order>20</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>   
+		            
+		                    	<fields>		                    		
+		                    		<jbp_giftlist_size_image_width translate="label">
+		                    			<label>Largura da imagem de fundo</label>
+		                    			<frontend_type>text</frontend_type>
+								        <sort_order>1</sort_order>
+								        <show_in_default>1</show_in_default>
+								        <show_in_website>1</show_in_website>
+								        <show_in_store>1</show_in_store>   
+								    </jbp_giftlist_size_image_width>
+		                    		
+		                    		<jbp_giftlist_size_image_heigth>
+		                    			<label>Altura da imagem de fundo</label>
+		                    			<frontend_type>text</frontend_type>
+								        <sort_order>1</sort_order>
+								        <show_in_default>1</show_in_default>
+								        <show_in_website>1</show_in_website>
+								        <show_in_store>1</show_in_store>   
+								    </jbp_giftlist_size_image_heigth>	
+								     <size_upload translate="label comment">
+			                            <label>Tamanho do upload da imagem em bytes</label>
+			                            <frontend_type>text</frontend_type>
+			                            <sort_order>20</sort_order>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment></comment>
+			                        </size_upload>
+								    <jbp_giftlist_image_default translate="label comment">
+			                            <label>Imagem de fundo padrão</label>
+			                            <frontend_type>image</frontend_type>
+			                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+			                            <upload_dir config="system/filesystem/media" scope_info="1">listacasamento</upload_dir>
+			                            <base_url type="media" scope_info="1">listacasamento</base_url>
+			                            <sort_order>40</sort_order>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment>Imagem de fundo padrão, caso o usuário não informe a imagem de fundo</comment>
+			                        </jbp_giftlist_image_default>	
+			                        
+			                        <jbp_giftlist_image_default_miniatura translate="label comment">
+			                            <label>Imagem miniatura padrão</label>
+			                            <frontend_type>image</frontend_type>
+			                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+			                            <upload_dir config="system/filesystem/media" scope_info="1">listacasamento</upload_dir>
+			                            <base_url type="media" scope_info="1">listacasamento</base_url>
+			                            <sort_order>50</sort_order>
+			                            <show_in_default>1</show_in_default>
+			                            <show_in_website>1</show_in_website>
+			                            <show_in_store>1</show_in_store>
+			                            <comment>Imagem miniatura padrão, caso o usuário não informe a imagem miniatura do mesmo</comment>
+			                        </jbp_giftlist_image_default_miniatura>	                    		
+		                    	</fields>
+		                    	
+	            		</jbp_giftlist_general_image>
+	            		
+	            	</groups>
+	            	
+			</jbp_giftlist_config>
+		</sections>
+</config>

@@ -1,0 +1,21 @@
+<?php if($this->getListActive()) $data = $this->getListActive(); ?>
+<div class="form-group">
+    <?php foreach($this->getShippingId() as $address): ?>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min">
+            <span>
+                <div class="container-jumb checkbox">
+                    <label>
+                        <input type="radio" name="jbpgl_event_shipping_id" id="jbpgl_event_shipping_id" value="<?php echo $address->getData('entity_id')?>" class="validate-one-required-by-name" <?php if($data['jbpgl_event_shipping_id'] == $address->getData('entity_id')) echo "checked";?> />
+                        <span class="span-add">Entregar neste endereço</span>
+                    </label>
+                </div>
+                <ol>
+                    <li>Endereço: <?php echo $address->getData('street')?>,</li>
+                    <li>Cidade: <?php echo $address->getData('city')?>,</li>
+                    <li>Estado: <?php echo $address->getData('region')?>,</li>
+                    <li>Cep: <?php echo $address->getData('postcode')?>,</li>
+                </ol>
+            </span>
+        </div>
+    <?php endforeach;?>
+</div>

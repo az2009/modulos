@@ -1,0 +1,90 @@
+<?php if (($_products = $this->getBestSellerProductCollection()) && $_products->getSize()): ?>
+    <div class="container-title">
+        <div class="box-title-left"></div>
+        <div class="box-title-center">
+            <h2 class="subtitle"><?php echo $this->__($this->getData('category_label')) ?></h2>
+        </div>
+        <div class="box-title-right"></div>
+    </div>
+    <div class="best-caroussel slider <?php echo $this->getData('id_html') ?>" style="opacity:0">
+        <ul id="<?php echo $this->getData('id_html') ?>" class="carrossel-produtos-jbp seller">
+            <?php $i=0; $t = 0;foreach ($_products->getItems() as $_product): ?>
+                <?php /*if ($i++%$_columnCount==0): ?>
+            <ul class="products-grid">
+            <?php endif*/ ?>
+                <li class="<?php if($t == 0) echo "active-slider ";?> item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                		<div class="box-principal">
+                    	    <div class="box-content">
+                                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>" class="product-image">
+                                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(170,170); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                                </a>
+                        	</div>
+                        	<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>">
+                    		  <div class="border-skew"></div>
+                    		</a>
+                    	</div>
+
+                        <div class="box-slider-price">
+                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>">
+                            	<?php echo $this->getPriceHtml($_product, true, '-new') ?>
+                            	<div class="border-skew-price"></div>
+                        	</a>
+                        </div>
+                        <div class="payment">
+                            <span>ou 10x de <?php echo Mage::helper('trendsclub_theme')->getLastParcela($_product->getFinalPrice())?></span>
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="xicon-heart">
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                </a>
+                            <?php endif; ?>
+
+                        </div>
+                        <div class="box-master-actions">
+                            <h3 class="product-name">
+                            	<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>">
+                            	   <?php
+                            	       echo (strlen($this->escapeHtml($_product->getName())) > 80) ? substr($this->escapeHtml($_product->getName()), 0 ,80 ).' ...': substr($this->escapeHtml($_product->getName()), 0 ,80 );
+                            	   ?>
+                        	   </a>
+                    		</h3>
+
+                            <div class="actions">
+                                <?php if(!$_product->canConfigure() && $_product->isSaleable()): ?>
+                                    <button type="button" title="<?php echo $this->quoteEscape($this->__('Add to Cart')) ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                        <span>
+                                            <span class="ico-cart"></span>
+                                        </span>
+                                    </button>
+                                <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
+
+                                        <a title="<?php echo $this->quoteEscape($this->__('View Details')) ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>">
+                                            <span>
+                                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+
+                                <?php else: ?>
+                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+                                <!--<ul class="add-to-links">
+                                     <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                        <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                                    <?php endif; ?>
+                                    <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                        <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                                    <?php endif; ?>
+                                </ul> -->
+                            </div>
+
+                        </div>
+                </li>
+                <?php /*if ($i%$_columnCount==0 || $i==count($_products)): ?>
+            </ul>
+            <?php endif*/ $t++;?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
+<?php endif; ?>
+
+

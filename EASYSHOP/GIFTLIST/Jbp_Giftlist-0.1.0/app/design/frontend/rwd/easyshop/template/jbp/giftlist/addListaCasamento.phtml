@@ -1,0 +1,15 @@
+<?php if($this->_getHelper()->isShowButton() && !$this->getRequest()->getParam('listcasamento')):?>
+    <?php
+        $productId = $this->getProduct()->getId();
+        $check = Mage::helper('jbp_giftlist')->checkItemExists($productId);
+    ?>
+    <?php if(count($check)):?>
+        <button type="button" class="button button-secundary btn btn-default btn-add-list-marriage add-disabled-m" disabled>
+            <span><?php echo $this->__('já adicionado')?></span>
+        </button>
+    <?php else: ?>
+        <button type="button" class="button button-secundary btn btn-default btn-add-list-marriage" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/additem/', array('id'=> $productId)) ?>')">
+            <span><?php echo $this->__('Adicionar a lista de casamento')?></span>
+        </button>
+    <?php endif; ?>
+<?php endif;?>

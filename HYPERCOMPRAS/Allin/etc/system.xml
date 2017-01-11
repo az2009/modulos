@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<allin translate="label" module="hc_allin">
+			<label>Allin</label>
+			<sort_order>99999</sort_order>
+		</allin>
+	</tabs>
+	<sections>
+		<allin_config translate="label" module="hc_allin">
+			<label>E-mails transacionais</label>
+			<tab>allin</tab>
+			<frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            	<groups translate="label">
+
+            		<allin_general>
+            			<label>General</label>
+            			<frontend_type>text</frontend_type>
+	                    <sort_order>1</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+
+	                    	<fields>
+
+	                    		<allin_magento_send translate="label">
+	                    			<label>Enviar via Magento</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </allin_magento_send>
+
+	                    		<allin_pass translate="label">
+	                    			<label>Senha</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </allin_pass>
+
+							    <allin_user translate="label">
+	                    			<label>Usuário</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </allin_user>
+
+	                    		<allin_enabled translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </allin_enabled>
+
+	                    	</fields>
+
+            		</allin_general>
+            	</groups>
+		</allin_config>
+	</sections>
+
+	<sections>
+		<allin_trackevent translate="label" module="hc_allin">
+			<label>Eventos</label>
+			<tab>allin</tab>
+			<frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            	<groups translate="label">
+
+            		<allin_user>
+            			<label>Novos cadastros</label>
+            			<frontend_type>text</frontend_type>
+	                    <sort_order>1</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                    	<fields>
+
+	                    		<allin_evento_geral translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>Habilitar/Desabilitar disparos de "Todos os eventos"</comment>
+							    </allin_evento_geral>
+
+				        		<allin_evento_debug translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>Habilitar/Desabilitar Debug</comment>
+							    </allin_evento_debug>
+
+							    <allin_evento_cliente translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>30</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <depends><allin_evento_geral>1</allin_evento_geral></depends>
+							        <comment>Habilitar/Desabilitar disparo do evento "Cliente logado"</comment>
+							    </allin_evento_cliente>
+
+	                    		<allin_evento_produto translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>20</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>Habilitar/Desabilitar disparo do evento "Visualização do produto"</comment>
+							        <depends><allin_evento_geral>1</allin_evento_geral></depends>
+							    </allin_evento_produto>
+
+							    <allin_evento_add_cart_produto translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>10</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>Habilitar/Desabilitar disparo do evento "Adicionar produto ao carrinho"</comment>
+							        <depends><allin_evento_geral>1</allin_evento_geral></depends>
+							    </allin_evento_add_cart_produto>
+
+							    <allin_evento_finalizar_pedido translate="label">
+	                    			<label>Enabled</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>10</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>Habilitar/Desabilitar disparo do evento "Finalizar pedido"</comment>
+							        <depends><allin_evento_geral>1</allin_evento_geral></depends>
+							    </allin_evento_finalizar_pedido>
+
+	                    	</fields>
+            		</allin_user>
+
+            	</groups>
+		</allin_trackevent>
+	</sections>
+
+</config>

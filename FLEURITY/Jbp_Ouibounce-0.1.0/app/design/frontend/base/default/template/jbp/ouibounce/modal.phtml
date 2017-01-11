@@ -1,0 +1,110 @@
+<?php if($this->_helper()->getStatus()): ?>
+
+<script>
+    var $modal = jQuery.noConflict();
+    $modal(document).ready(function(){
+
+        $modal('#btn-ouibounce').click(function(){
+
+        	if(!$modal('.motivo').is(':checked')){
+        	    $modal('.span-msg').empty();
+        	    $modal('.span-msg').append('Selecione uma das opções');
+        	    return false;
+        	}
+
+        	if($modal('.motivo:checked').val() == 'encontrou_problema'){
+            	if($modal('.problema').val() == '' || $modal('.email_customer').val() == ''){
+            		$modal('.span-msg').empty();
+            	    $modal('.span-msg').append('Informe o e-mail e a dificuldade');
+            	    return false;
+            	}
+        	}
+
+        	$modal('.span-msg').empty();
+
+            var formData = {
+                		motivo : $modal('.motivo:checked').val(),
+                		problema : $modal('.problema').val(),
+                		email_customer : $modal('.email_customer').val(),
+                    };
+
+					$modal.ajax({
+		    				url: '//loja.fleurity.com.br/ouibounce/index/register',
+						    type: "POST",
+						    dataType: 'json',
+						    cache : false,
+						    data: formData,
+						    beforeSend: function(data2){
+							    $modal('#btn-ouibounce').empty();
+							    $modal('#btn-ouibounce').append('<img src="https://s.ytimg.com/yts/img/loader-vflff1Mjj.gif" />');
+						    },
+						    success: function(data2){
+						      $modal('.box-static').empty();
+						      $modal('.box-static').append('<div class="box-cupom"><span class="span-cupom"><span>Obrigado por sua resposta. Acabamos de liberar para você um cupom de <?php echo $this->getQtyDiscount() ?> de desconto para você efetuar sua compra nos próximos 30 minutos. Utilize o código <strong><?php echo $this->getCupom()?></strong> e obtenha o desconto.');
+						    },
+						    error: function(data2){
+						      $modal('.box-static').append('<div class="box-cupom"><span class="span-cupom">Obrigado pela avaliação</span></div>');
+						    },
+						    complete:function(data2){
+						    	$modal('.modal-footer').empty();
+						    	$modal('.modal-footer').append('<button type="button" class="close_ouibounce" onclick="closeOuibounce()">Fechar</button>');
+						    	$modal('.res').val('');
+						    	$modal('#btn-ouibounce').empty();
+						    	$modal('#ouibounce-modal .modal').height(350);
+					    	}
+
+				    });
+        });
+
+    });
+
+</script>
+
+
+<div id="ouibounce-modal">
+      <div class="underlay"></div>
+      <div class="modal">
+        <div class="modal-title">
+          <h3>por que você não finalizou a compra?</h3>
+          <span class="close-ouibounce" onclick="closeOuibounce()">x</span>
+        </div>
+
+        <div class="modal-body">
+            <div class="container-form1 box-static">
+                <form>
+                    <ul>
+                        <li><label><input type="radio" name="motivo" class="motivo" value="preco_caro" />Preço do produto</label></li>
+                        <li><label><input type="radio" name="motivo" class="motivo" value="valor_frete" />Valor do frete</label></li>
+                        <li><label><input type="radio" name="motivo" class="motivo" value="encontrou_problema" />Dificuldade em comprar</label></li>
+                        <!-- <li class="textarea_problema"><label>Nos informe a dificuldade para melhorarmos a sua experiência de compra</label></li>-->
+                        <li class="textarea_problema"><label>E-mail<br/><input type="text" name="email_customer" class="email_customer res" /></label></li>
+                        <li class="textarea_problema">
+                            <label>
+                                <label>
+                                    Dificuldade: <br />
+                                    <textarea name="problema" class="problema res" ></textarea>
+                                </label>
+                            </label>
+                        </li>
+                        <li><button type="button" id="btn-ouibounce">Enviar</button></li>
+                        <li><span class="span-msg"></span></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+

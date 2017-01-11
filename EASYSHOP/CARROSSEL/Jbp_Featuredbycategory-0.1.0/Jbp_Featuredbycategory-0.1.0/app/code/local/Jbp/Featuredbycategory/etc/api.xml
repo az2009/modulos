@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+	 <api> 		
+ 		<resources>
+ 		
+ 			<featuredbycategory translate="title" module="jbp_featuredbycategory">
+	 			<model>jbp_featuredbycategory/api</model>
+	 			<title>Retorna os métodos a serem chamados para listar os produtos</title>
+	 			<acl>featuredbycategory</acl>
+	 			<methods>
+	 				<getproductbyfilter translate="title" module="jbp_featuredbycategory">
+	 					<title>Retorna uma lista de produtos de acordo com os parametros passados</title>
+	 					<method>getproductbyfilter</method>
+	 					<acl>featuredbycategory</acl>
+	 				</getproductbyfilter>	 				
+	 			</methods>	 			
+			 </featuredbycategory>
+			 
+			 <featuredbycategory_bestseller>
+			 	<model>jbp_featuredbycategory/api</model>
+	 			<title>Retorna os métodos a serem chamados para listar os produtos</title>
+	 			<acl>featuredbycategory_bestseller</acl>
+	 			<methods>
+	 				<getproductbestseller translate="title" module="jbp_featuredbycategory">
+	 					<title>Retorna uma lista de produtos de acordo com os parametros passados</title>
+	 					<method>getproductbestseller</method>
+	 					<acl>featuredbycategory_bestseller/getproductbestseller</acl>
+	 				</getproductbestseller>	 				
+	 			</methods>	
+			 </featuredbycategory_bestseller>
+			 
+		</resources>		 
+		<resources_alias>
+ 			<featuredbycategory>featuredbycategory</featuredbycategory>
+ 			<featuredbycategory_bestseller>featuredbycategory_bestseller</featuredbycategory_bestseller>
+ 		</resources_alias> 		
+ 		<v2>
+ 			<resources_function_prefix>
+	 			<featuredbycategory>featuredbycategory</featuredbycategory>
+	 			<featuredbycategory_bestseller>featuredbycategoryBestseller</featuredbycategory_bestseller>
+			</resources_function_prefix>
+ 		</v2>	 		
+ 		<acl>
+            <resources>
+                
+                <featuredbycategory translate="title" module="jbp_featuredbycategory">                    
+                    <title>Featured By Category API</title>                    
+                    <sort_order>100</sort_order>
+                    <getproductbyfilter translate="title" module="jbp_featuredbycategory">
+                        <title>Retorna uma lista de produtos de acordo com os parametros passados</title>
+                    </getproductbyfilter>
+                </featuredbycategory>
+                
+                <featuredbycategory_bestseller translate="title" module="jbp_featuredbycategory">                    
+                    <title>Featured By Category API</title>                    
+                    <sort_order>100</sort_order>
+                    <getproductbestseller translate="title" module="jbp_featuredbycategory">
+                        <title>Retorna uma lista de produtos de acordo com os parametros passados</title>
+                    </getproductbestseller>
+                </featuredbycategory_bestseller>
+                
+            </resources>	 
+ 		</acl> 		
+	</api>					   
+</config>

@@ -1,0 +1,35 @@
+<?php if(Mage::helper('jbp_giftlist/rules')->checkItemCart() == 'contem'): ?>
+    <button type="button" class="btn btn-primary btn-lg" id="modal-msg-noivos" data-toggle="modal" data-target="#myModal">
+    	<label>
+    		<span><?php echo $this->__('Mande uma mensagem para os noivos')?></span>
+		</label>
+	</button>
+    <div class="modal fade modal-login-gift footer-gift" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><?php echo $this->__('Mensagem para os noivos')?></h4>
+          </div>
+            <form id="frmdata" action="" method="post">
+                  <div class="modal-body">
+                        <textarea name="jbp_giftlist_msg" id="msgcasal" class="input-text textarea-gift" placeholder="<?php echo $this->__('Digite sua mensagem para os noivos')?>"><?php echo Mage::helper('jbp_giftlist/config')->getMsgDefault()?></textarea>
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-default button btn-cancel" data-dismiss="modal" id="btn-clear-msg"><span><?php echo $this->__('Cancelar')?></button>                  
+                        <button type="button" class="btn btn-default button btn-save" data-dismiss="modal"><span><?php echo $this->__('Salvar')?></span></button>
+                  </div>
+            </form>
+        </div>
+      </div>
+    </div>
+    <script>
+        jQuery(function(){
+    		jQuery('#btn-clear-msg').click(function(){
+    			jQuery('#msgcasal').val('');
+    		});		
+        	jQuery('#myModal').on('shown.bs.modal', function () {
+        		jQuery('#myInput').focus()
+      		})
+        });
+    </script>
+<?php endif;?>

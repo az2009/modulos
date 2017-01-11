@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	 <modules>
+		  <Jefferson_Provador>
+		   		<active>true</active>
+		   		<codePool>local</codePool>
+		   		<depends>
+                    <Peerforest_Ajax/>
+                </depends>
+		  </Jefferson_Provador>
+	 </modules>
+</config>

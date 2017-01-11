@@ -1,0 +1,56 @@
+<div class="modal fade modal-login-gift" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Efetue seu login</h4>
+      </div>
+
+        <form id="frmdata" action="" method="post">
+              <div class="modal-body">
+                    <div class="input-group input-group-lg">
+                      <input type="text" name="username" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon1">
+                    </div>
+
+                    <div class="input-group input-group-lg">
+                      <input type="password" name="password" class="form-control input-pass" placeholder="Senha" aria-describedby="sizing-addon1">
+                      <?php echo $this->getBlockHtml('formkey') ?>
+                    </div>
+                    <div class="msg-error"></div>
+
+              </div>
+              <div class="modal-footer">
+                    <button type="button" class="btn btn-default button btn-cancel" data-dismiss="modal"><span>Cancelar</span></button>
+                    <button type="submit" id="btn-submit-logar" class="btn btn-primary button"><span>Login</span></button>
+              </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    jQuery(function(){
+    	jQuery('#frmdata').submit(function(){
+
+  		        var formData = jQuery('#frmdata').serialize();
+
+        		jQuery.ajax({
+        			url : "<?php echo $this->getUrl('listaCasamento/index/loginPost/')?>",
+        			type: "POST",
+        			dataType: 'json',
+                    cache : false,
+        			data : formData,
+        			success: function(data){
+        				if(data.success == 'ok'){ setLocation('<?php echo $this->getUrl('listaCasamento/index/', array('login' => 1))?>')}
+        			},
+        			error: function (data){
+        				 jQuery('.msg-error').empty();
+        			     jQuery('.msg-error').append(data.error);
+
+        			     console.log(data.error);
+        			}
+        		});
+    		return false;
+    	});
+
+    });
+</script>

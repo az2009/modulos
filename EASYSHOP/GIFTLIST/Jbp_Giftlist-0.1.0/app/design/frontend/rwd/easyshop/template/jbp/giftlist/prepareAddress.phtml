@@ -1,0 +1,33 @@
+ <?php if(Mage::helper('jbp_giftlist/rules')->checkItemCart() == 'contem'): ?>
+ <?php $_address = $this->getAddress(); ?>
+    <script>
+      jQuery(function(){
+    	  	jQuery('#shipping-address-select').each(function(){ shipping.newAddress(!this.value); });
+          	jQuery("input[name='shipping[firstname]']").val('<?php echo $_address->getData('firstname')?>');
+            jQuery("input[name='shipping[lastname]']").val('<?php echo $_address->getData('lastname')?>');
+            jQuery("input[name='shipping[postcode]']").val('<?php echo $_address->getData('postcode')?>');
+            jQuery("input[name='shipping[telephone]']").val('<?php echo $_address->getData('telephone')?>');
+            jQuery("input[name='shipping[fax]']").val('<?php echo $_address->getData('fax')?>');
+            jQuery("input[name='shipping[city]']").val('<?php echo $_address->getData('city')?>');
+            jQuery("#shipping-new-address-form .street1-input").val('<?php echo$_address->getStreet(1)?>');
+            jQuery("#shipping-new-address-form .street2-input").val('<?php echo$_address->getStreet(2)?>');
+            jQuery("#shipping-new-address-form .street3-input").val('<?php echo$_address->getStreet(3)?>');
+            jQuery("#shipping-new-address-form .street4-input").val('<?php echo$_address->getStreet(4)?>');
+            jQuery("select[name='shipping[region_id]'] option[value=<?php echo $_address->getData('region_id')?>]").prop('selected', true);
+            jQuery("#shipping-new-address-form .input-text").prop('readonly',true);
+            jQuery("#shipping-address").append('<div class="mask-shipping"></div>');                    
+      });
+    </script>
+    <style>
+        #shipping-address {
+            position: relative;
+        }
+        .mask-shipping {
+           position: absolute;
+    	   top:0;
+    	   bottom: 0;
+           width: 100%;
+           z-index: 99;
+        }
+    </style>
+<?php endif;?>

@@ -1,0 +1,89 @@
+li.provador-sim  {
+	display: none;
+}
+
+div.btn-cart > button.button.btn-cart {
+    position: absolute;
+    right: 5px;
+}
+
+div.add-to-prov {
+	float: right !important;
+}
+
+div.add-to-prov button.btn-prov span span {
+	padding-left: 0;
+}
+
+
+.container-button-toprov{
+	float: left;
+}
+
+div.products-grid button.btn-cart.button:hover span,
+div.products-list button.button:hover span,
+ul.products-grid button.btn-cart.button:hover span,
+ul.products-list button.button:hover span,
+.add-to-cart .button.button:hover span {
+	color: #FF0066 !important;
+}
+
+div.products-grid .container-button-prov button.btn-cart.button:hover span,
+div.products-list .container-button-prov button.button:hover span,
+ul.products-grid .container-button-prov button.btn-cart.button:hover span,
+ul.products-list .container-button-prov button.button:hover span,
+.add-to-cart .container-button-prov .button.button:hover span {
+	color: #45BAC2 !important;
+}
+
+
+.btn-cart .container-button-prov {
+    position: absolute;
+    width: 35%;
+    z-index: 1;
+    top: 8px;
+    left: 88px;
+}
+
+.btn-cart {
+
+}
+
+.btn-prov {
+	border: none;
+}
+
+.btn-prov:hover {
+	cursor: pointer;
+
+}
+
+
+.btn-prov:hover span span{
+	color: #1bbeb4 !important;
+}
+
+
+.btn-prov span {
+	background-color: #252525 !important;
+    color: #bebebe !important;
+    text-transform: uppercase;
+    float: none;
+    text-align: left;
+    border-bottom: none;
+	transition:all 0.4s ease;
+	-moz-transition:all 0.4s ease;
+	-webkit-transition:all 0.4s ease;
+	-o-transition:all 0.4s ease;
+}
+
+.btn-prov span span{
+	padding: 11px 20px;
+    border-bottom: none;
+    line-height: 18px;
+}
+
+.products-grid .container-button-prov .button.btn-cart span {
+	padding: 0;
+	background: transparent !important;
+}

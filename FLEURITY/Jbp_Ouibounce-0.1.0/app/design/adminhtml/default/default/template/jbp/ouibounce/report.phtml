@@ -1,0 +1,82 @@
+<style>
+    .listDonuts {
+        width: 100%;
+    }
+
+    .listDonuts li {
+        float: left;
+        width: 30%;
+    }
+    .container-box h1 {
+        border-bottom: 5px solid #0B62A4;
+        padding-left: 10px;
+        margin-bottom: 40px;
+    }
+
+</style>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+ <script>
+
+    $oui = jQuery.noConflict();
+
+    $oui(function(){
+
+        //Gráfico
+            new Morris.Donut({
+              element: 'byPrice',
+              data: [
+                {label: "<?php echo $this->__('Preço do produto') ?>", value: <?php echo $this->getByPreco() ?> },
+              ]
+            });
+
+            new Morris.Donut({
+                element: 'byDificuldade',
+                data: [
+                  {label: "<?php echo $this->__('Dificuldade de compra') ?>", value: <?php echo $this->getByDificuldade() ?> },
+                ]
+              });
+
+            new Morris.Donut({
+                element: 'byFrete',
+                data: [
+                  {label: "<?php echo $this->__('Valor do frete') ?>", value: <?php echo $this->getByFrete() ?> },
+
+                ]
+              });
+
+
+    });
+</script>
+
+<div class="container-box">
+      <h1>Relatório</h1>
+      <ul class="listDonuts">
+        <li><div id="byPrice" class="clicadosAbertos" style="height: 250px"></div></li>
+        <li><div id="byDificuldade" class="clicadosAbertos" style="height: 250px"></div></li>
+        <li><div id="byFrete" class="clicadosAbertos" style="height: 250px"></div></li>
+      </ul>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+<meta property="og:url" content="<?php echo $this->getUrl('listaCasamento/index/listaCasamentoProdutos/', array('id'=>$this->getListByCustomer()->getData('jbpgl_id')))?>" />
+<meta property="og:title" content="Lista de casamento de <?php echo $this->getListByCustomer()->getData('jbpgl_name_noivo').' & '. $this->getListByCustomer()->getData('jbpgl_name_noiva')?>" />
+<meta property="og:description" content="<?php echo $this->__('Vou casar preciso de presentes')?>" />
+<meta property="og:image" content="<?php $this->_getHelper()->getPathImage($this->getListByCustomer()->getData('jbpgl_banner'))?>" />

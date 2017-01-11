@@ -1,0 +1,62 @@
+<div class="modal fade modal-login-gift" id="myModalAd" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAd">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabelAd">Cadastrar novo endereço</h4>
+      </div>
+
+      <form id="formCadastrarEndereco" action="<?php echo $this->getUrl('listaCasamento/index/addAddressPost/')?>" method="post">
+          <?php echo $this->getBlockHtml('formkey')?>
+          <div class="modal-body">
+            <?php echo $this->getChildHtml('billing.address')?>
+          </div>
+          <div class="msgajax"></div>
+          <div class="modal-footer">            
+            <button type="button" id="closeModalAddress"class="btn btn-default button btn-cancel" data-dismiss="modal"><span>Cancelar</span></button>        	
+            <button type="submit" id="btn-submit-cadastrar" class="btn btn-primary button"><span>Cadastrar</span></button>            
+          </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    //< ![CDATA[
+
+    //]]>
+</script>
+
+<script>
+    jQuery(function(){
+    	jQuery('#formCadastrarEndereco').submit(function(){
+  		          var customForm = new VarienForm('formCadastrarEndereco');
+    		      if(customForm.validator && customForm.validator.validate()){
+
+	    	            var formData = jQuery('#formCadastrarEndereco').serialize();
+
+                		jQuery.ajax({
+                			url : "<?php echo $this->getUrl('listaCasamento/index/addAddressPost/')?>",
+                			type: "POST",
+                			dataType: 'json',
+                            cache : false,
+                			data : formData,
+                			success: function(data){
+                			     jQuery('.msgajax').empty();
+                			     jQuery('.msgajax').append(data.success);
+                			     jQuery('#containerListAddress').empty();
+                			     jQuery('#containerListAddress').append(data.body);
+                			     jQuery('#closeModalAddress').click();
+
+                			},
+                			error: function (data){
+                				jQuery('.msgajax').empty();
+                				jQuery('.msgajax').append(data.error);
+                			}
+                		});
+    		     }
+    		return false;
+    	});
+
+    });
+</script>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Jbp_Ouibounce</name>
+    <version>0.1.0</version>
+    <stability>stable</stability>
+    <license>The Open Software License 3.0 (OSL-3.0)</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Jbp_Ouibounce</summary>
+    <description>Jbp_Ouibounce</description>
+    <notes>Jbp_Ouibounce</notes>
+    <authors><author><name>Jefferson Batista Porto</name><user>az2009</user><email>jefferson.b.porto@gmail.com</email></author></authors>
+    <date>2016-04-22</date>
+    <time>23:55:52</time>
+    <contents><target name="magelocal"><dir name="Jbp"><dir name="Ouibounce"><dir name="Block"><dir name="Adminhtml"><file name="Ouibounce.php" hash="7d0d2475904de28b2fbd01ab69b3fa84"/></dir><file name="Ouibounce.php" hash="41493562f7fa02002f294c4c80b23cef"/></dir><dir name="Helper"><file name="Data.php" hash="4c68aff308ee05a83c7d984c9840b7c1"/></dir><dir name="Model"><dir name="Mysql4"><dir name="Ouibounce"><file name="Collection.php" hash="42badb54f3b85a6385ee38bb43dd81f8"/></dir><file name="Ouibounce.php" hash="781b33c2a6adf262ee57ef3fc2a3a880"/></dir><file name="Ouibounce.php" hash="a0f2cd996b6567a28ad660d5c73c1216"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="OuibounceController.php" hash="6c0a79ac32e0b576e3c1b2b3fbfa1e4f"/></dir><file name="IndexController.php" hash="9cca27daaad4140467709fe650fa9574"/></dir><dir name="etc"><file name="config.xml" hash="32e7e74c3e0b3cdc043a0dc6e45ea0c5"/><file name="system.xml" hash="fdb0f388638de4b6f09837cf2be29daa"/></dir><dir name="sql"><dir name="jbp_ouibounce_setup"><file name="mysql4-install-0.1.0.php" hash="b32b9d67557c91ec716e43241a96e4e2"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Jbp_Ouibounce.xml" hash="8b96efc5d937dcf00027dda95a0a9a7f"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><dir name="jbp"><file name="jbp_ouibounce.xml" hash="741194c9e157952a5b71ea35932623f6"/></dir></dir><dir name="template"><dir name="jbp"><dir name="ouibounce"><file name="modal.phtml" hash="b7d128d1e23479f3b64661f918e9a9c4"/></dir></dir></dir></dir></dir></dir><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><dir name="jbp"><dir name="adminhtml"><file name="jbp_ouibounce.xml" hash="983f6e505c3ceb271f3206acef718bdf"/></dir></dir></dir><dir name="template"><dir name="jbp"><dir name="ouibounce"><file name="report.phtml" hash="694f5bff483c76117a21d51433be16b3"/></dir></dir></dir></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="js"><dir name="jbp"><dir name="ouibounce"><file name="ouibounce.min.js" hash="c500998a1f088ba549666105d1ce10ce"/><file name="script.js" hash="4b70ebbefe9a8e31197b1786cf2932c9"/></dir></dir></dir><dir name="css"><dir name="jbp"><dir name="ouibounce"><file name="modal.css" hash="2236292b55cc8014f5e615038050bcea"/></dir></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

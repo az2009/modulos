@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<layout>
+	<adminhtml_ouibounce_index>
+		<reference name="content">
+			<block type="jbp_ouibounce/adminhtml_ouibounce" name="ouibounce" template="jbp/ouibounce/report.phtml" />
+		</reference>
+	</adminhtml_ouibounce_index>
+</layout>

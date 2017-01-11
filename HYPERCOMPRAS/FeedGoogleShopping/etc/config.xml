@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<HC_FeedGoogleShopping>
+			<version>0.1.0</version>
+		</HC_FeedGoogleShopping>
+	</modules>
+
+	 <frontend>
+	    <routers>
+	      <hc_feedgoogleshopping>
+	        <use>standard</use>
+	        <args>
+	          <module>HC_FeedGoogleShopping</module>
+	          <frontName>feedgoogleshopping</frontName>
+	        </args>
+	      </hc_feedgoogleshopping>
+	    </routers>
+    </frontend>
+
+	<admin>
+	   <routers>
+           <adminhtml>
+               <args>
+                   <modules>
+                       <hc_feedgoogleshopping after="Mage_Adminhtml">HC_FeedGoogleShopping_Adminhtml</hc_feedgoogleshopping>
+                   </modules>
+               </args>
+           </adminhtml>
+       </routers>
+	</admin>
+
+	<adminhtml>
+		<layout>
+            <updates>
+                <buyshoparallax>
+                    <file>hc/feedgoogleshopping.xml</file>
+                </buyshoparallax>
+            </updates>
+        </layout>
+
+	    <acl>
+	    	<resources>
+	    		<admin>
+	    			<children>
+	    				<system>
+	    					<children>
+	    						<config>
+	    							<children>
+	    								<feedgoogleshopping_config>
+	    									<title>Feed Google Shopping</title>
+	    								</feedgoogleshopping_config>
+	    							</children>
+	    						</config>
+	    					</children>
+	    				</system>
+	    			</children>
+	    		</admin>
+	    	</resources>
+	    </acl>
+   </adminhtml>
+
+	<global>
+		<blocks>
+			<hc_feedgoogleshopping>
+				<class>HC_FeedGoogleShopping_Block</class>
+			</hc_feedgoogleshopping>
+		</blocks>
+
+		<helpers>
+			<hc_feedgoogleshopping>
+				<class>HC_FeedGoogleShopping_Helper</class>
+			</hc_feedgoogleshopping>
+		</helpers>
+
+		<models>
+			<hc_feedgoogleshopping>
+				<class>HC_FeedGoogleShopping_Model</class>
+			</hc_feedgoogleshopping>
+		</models>
+
+		<resources>
+
+			<hc_feedgoogleshopping_setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</hc_feedgoogleshopping_setup>
+
+			<hc_feedgoogleshopping_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</hc_feedgoogleshopping_write>
+
+			<hc_feedgoogleshopping_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</hc_feedgoogleshopping_read>
+
+		</resources>
+
+		<resources>
+          <hc_feedgoogleshopping_setup>
+
+            <setup>
+              <module>HC_FeedGoogleShopping</module>
+              <class>Mage_Eav_Model_Entity_Setup</class>
+            </setup>
+
+            <connection>
+              <use>default_setup</use>
+            </connection>
+
+          </hc_feedgoogleshopping_setup>
+      </resources>
+
+	</global>
+
+</config>

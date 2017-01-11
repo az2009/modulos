@@ -1,0 +1,185 @@
+<?php
+    $_productCollection=$this->setProductCollection();
+    $_helper = $this->helper('catalog/output');
+    $_block = $this->getBlockGiftList();
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('Você ainda não adicionou nenhum produto para a sua lista') ?></p>
+<?php else: ?>
+
+<div>
+	<div class="bx-wrapper best-caroussel">
+		<div class="bx-viewport">
+            <div id="category-products-giftlist" class="category-products">
+                <?php // Grid Mode ?>
+                <?php $_collectionSize = $_productCollection->count() ?>
+                <?php $_columnCount = $this->getColumnCount(); ?>
+                <ul class="products-grid products-grid-giftlist products-grid--max-<?php echo $_columnCount; ?>-col">
+                    <?php $i=0; foreach ($_productCollection as $_product): ?>
+                        <?php /*if ($i++%$_columnCount==0): ?>
+                        <?php endif*/ ?>
+                        
+                                <li 
+                                	class=" item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>
+                                		<?php 
+                                		  if(
+                                		      (in_array($_product->getId(), $this->getProductsRansomed()) && $this->getRequest()->getParam('item') == 'produtosDesejados')
+                                		      ||
+                                		      (in_array($_product->getId(), $this->getProductsRansomed()) && $this->getRequest()->getParam('item') == 'resgatarProdutos')
+                                		      ||
+                                		      (in_array($_product->getId(), $this->getBlockGiftList()->getAllIdOfProductsReceived(array('credito_lista_casamento'))) && $this->getRequest()->getParam('item') == 'produtosDesejados')
+                                		      ):
+                                		?>
+                                		
+                                		
+                                		disabled-li
+                                		<?php endif;?>">
+                    
+                    				<div class="box-principal">
+                                	     <div class="box-content">
+                                            <a href="javascript:void(0)" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                                                <?php $_imgSize = 180; ?>
+                                                <img id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                                     src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                                                     alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                                            </a>
+                                         </div>
+                                    	 <a href="javascript:void(0)" title="<?php echo $this->escapeHtml($_product->getName()) ?>">
+                                		 	 <div class="border-skew">
+             	                    		<?php if(in_array($_product->getId(), $this->getProductsRansomed()) && $this->getRequest()->getParam('item')): ?>
+             	                    			<span class="mark-l resgatado-gf">
+             	                    				<span>Resgatado</span>
+                                				</span>
+             	                    		<?php endif;?>
+             	                    		<?php if(in_array($_product->getId(), $this->getBlockGiftList()->getAllIdOfProductsReceived(array('credito_lista_casamento'))) && $this->getRequest()->getParam('item')): ?>
+             	                    			<span class="mark-l recebido-gf">
+                                					<span>Recebido</span>
+                                				</span>
+             	                    		<?php endif;?>
+                                		 	 </div>
+                                		 </a>
+                                	</div>
+                                	
+                                	<div class="box-slider-price">
+                                        <a href="javascript:void(0)" title="<?php echo $this->escapeHtml($_product->getName()) ?>">
+                                            <?php echo $this->getPriceHtml($_product, true) ?>
+                                            <span class="label-frete">mais frete</span>
+                                            <div class="border-skew-price"></div>
+                                        </a>
+                                    </div>
+                                	    
+                                     <div class="box-master-actions">
+                                        <h2 class="product-name">
+                                        	<a href="javascript:void(0)" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                                        		<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                    		</a>
+                                        </h2>
+                                        <?php
+                                        // Provides extra blocks on which to hang some features for products in the list
+                                        // Features providing UI elements targeting this block will display directly below the product name
+                                        if ($this->getChild('name.after')) {
+                                            $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                            foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                                $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                                $_nameAfterChild->setProduct($_product);
+                                                echo $_nameAfterChild->toHtml();
+                                            }
+                                        }
+                                        ?>
+                                        
+                                        <?php if($_product->getRatingSummary()): ?>
+                                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                        <?php endif; ?>
+                                        
+                    					<div class="box-resgatar">
+                    						<?php if(!in_array($_product->getId(), $this->getProductsRansomed()) && $this->getRequest()->getParam('item') == 'resgatarProdutos'):?>
+                    							<a href="javascript:void(0)" id="<?php echo $_product->getId() ?>" class="quick_view_btn">
+                    								<span><?php echo $this->__('Resgatar') ?></span>
+                    							</a>
+                                    		<?php endif;?>
+                    					</div>
+                                     </div>
+                                     
+                                     <div class="box-btn-remove">
+                                         <?php if(!in_array($_product->getId(), $_block->getAllIdOfProductsReceived()) && $this->getRequest()->getParam('item') == 'produtosDesejados'):?>
+                                        	<a href="<?php echo $this->getUrl('listaCasamento/index/remove/', array('item' => $_product->getId()))?>" class="btn-gift">excluir</a>                	                 	
+                                         <?php endif;?>
+                                     </div>
+                                    
+                                </li>
+                        <?php /*if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+                        <?php endif*/ ?>
+                    <?php endforeach ?>
+            
+                </ul>
+                <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+                <?php endif; ?>
+            
+            	<div id="modal" class="modal">
+            		<div class="modal-content">
+            				<a href="javascript:void(0)" class="btn_close">
+            					<i class="fa fa-times" aria-hidden="true"></i>
+            				</a>
+            				<div class="main-content"></div>
+            		</div>
+            		<div class="overlay"></div>
+            	</div>
+            
+            
+            </div>
+		</div>
+	</div>
+</div>
+<?php
+// Provides a block where additional page components may be attached, primarily good for in-page JavaScript
+if ($this->getChild('after')) {
+    $_afterChildren = $this->getChild('after')->getSortedChildren();
+    foreach ($_afterChildren as $_afterChildName) {
+        $_afterChild = $this->getChild('after')->getChild($_afterChildName);
+        //set product collection on after blocks
+        $_afterChild->setProductCollection($_productCollection);
+        echo $_afterChild->toHtml();
+    }
+}
+?>
+
+<?php $enablejQuery =  Mage::getStoreConfig('quickview/quickview/enable_jquery'); ?>
+<?php if($enablejQuery == 1): ?>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<?php endif; ?>
+<script type="text/javascript">
+jQuery(function(){
+	var baseUrl = '<?php echo Mage::getBaseUrl(); ?>';
+	var containerClass = 'category-products';
+	jQuery('.'+containerClass+' li').each(function(e){
+		var productId = jQuery(this).find('.quick_view_btn').attr('id');
+		jQuery(this).find('.quick_view_btn').click(function(){
+			jQuery(this).html('Carregando..');
+			jQuery.ajax({
+				type: "POST",
+				url: baseUrl+"quickview",
+				data: "id="+productId,
+				success: function(msg){
+					//$("html, body").animate({ scrollTop: 0 }, "slow");
+					jQuery('.quick_view_btn').html('Resgatar');
+					jQuery('#modal .main-content').empty().append(msg);
+					jQuery('#modal').css({'top':'50%','visibility':'visible','opacity':'1','display':'block'});
+					// popup submit validation
+					jQuery('#modal .main-content form').submit(function(e){
+						var valSelect = $('.validate-quickview-select').val();
+						if(valSelect == ''){
+							alert('please select option values');
+							return false;
+						}else{
+							return true;
+						}
+					});
+				}
+			});
+		});
+	});
+	jQuery('.btn_close').click(function(){
+		jQuery('#modal').css({'top':'-50%','visibility':'hidden','opacity':'0'});
+	});
+ });
+</script>

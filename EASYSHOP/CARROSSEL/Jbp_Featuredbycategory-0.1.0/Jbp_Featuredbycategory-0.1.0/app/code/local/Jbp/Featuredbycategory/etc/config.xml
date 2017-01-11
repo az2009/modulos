@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jbp_Featuredbycategory>
+            <version>0.1.0</version>
+        </Jbp_Featuredbycategory>
+    </modules>
+
+    <global>
+
+        <helpers>
+            <jbp_featuredbycategory>
+                <class>Jbp_Featuredbycategory_Helper</class>
+            </jbp_featuredbycategory>
+        </helpers>
+
+        <blocks>
+            <jbp_featuredbycategory>
+                <class>Jbp_Featuredbycategory_Block</class>
+            </jbp_featuredbycategory>
+        </blocks>
+        
+        <models>
+        	<jbp_featuredbycategory>
+        		<class>Jbp_Featuredbycategory_Model</class>
+       		</jbp_featuredbycategory>
+        </models>
+
+    </global>
+
+    <frontend>
+    	<events>
+   			<catalog_controller_product_view >
+   				<observers>
+					<jbp_clickview_model_observer>
+						<type>singleton</type>
+						<class>Jbp_Featuredbycategory_Model_Observer</class>
+						<method>setExecuteClickview</method>
+					</jbp_clickview_model_observer>
+				</observers>
+   			</catalog_controller_product_view >
+   			
+   			<catalog_product_compare_add_product>
+   				<observers>
+					<jbp_clickview_model_observer>
+						<type>singleton</type>
+						<class>Jbp_Featuredbycategory_Model_Observer</class>
+						<method>setExecuteClickview</method>
+					</jbp_clickview_model_observer>
+				</observers>
+   			</catalog_product_compare_add_product>
+   			
+  			<wishlist_add_product>
+	   			<observers>
+					<jbp_clickview_model_observer>
+						<type>singleton</type>
+						<class>Jbp_Featuredbycategory_Model_Observer</class>
+						<method>setExecuteClickview</method>
+					</jbp_clickview_model_observer>
+				</observers>
+	   		</wishlist_add_product>
+	   		
+	   		<checkout_cart_product_add_after>
+	   			<observers>
+					<jbp_clickview_model_observer>
+						<type>singleton</type>
+						<class>Jbp_Featuredbycategory_Model_Observer</class>
+						<method>setExecuteClickview</method>
+					</jbp_clickview_model_observer>
+				</observers>
+	   		</checkout_cart_product_add_after>
+ 
+   		</events>
+    
+    	<routers>
+            <easybanner>
+                <use>standard</use>
+                <args>
+                    <module>Jbp_Featuredbycategory</module>
+                    <frontName>featuredbycategory</frontName>
+                </args>
+            </easybanner>
+        </routers>
+        <layout>
+            <updates>
+                <jbp_featuredbycategory>
+                    <file>jbp/featuredbycategory.xml</file>
+                </jbp_featuredbycategory>
+            </updates>
+        </layout>       
+    </frontend>
+
+
+</config>

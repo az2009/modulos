@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<HC_ShippingRestriction>
+			<version>0.1.0</version>
+		</HC_ShippingRestriction>
+	</modules>
+	
+	<adminhtml>
+	    <acl>
+	    	<resources>
+	    		<admin>
+	    			<children>
+	    				<system>
+	    					<children>
+	    						<config>
+	    							<children>
+	    								<shippingrestrictionhc_config>
+	    									<title>Restrição de CEP</title>
+	    								</shippingrestrictionhc_config>
+	    							</children>
+	    						</config>
+	    					</children>
+	    				</system>
+	    			</children>
+	    		</admin>
+	    	</resources>
+	    </acl>
+   </adminhtml>
+   
+	<global>
+
+		<models>
+			<hc_shippingrestriction>
+				<class>HC_ShippingRestriction_Model</class>
+			</hc_shippingrestriction>
+		</models>
+		
+		<helpers>
+			<hc_shippingrestriction>
+				<class>HC_ShippingRestriction_Helper</class>
+			</hc_shippingrestriction>
+		</helpers>
+		
+		<events>
+	        <sales_quote_collect_totals_before>
+		        <observers>
+		            <shipping_restriction_rule>
+			            <class>hc_shippingrestriction/observer</class>
+			            <method>checkPostCode</method>
+		            </shipping_restriction_rule>
+		        </observers>
+	        </sales_quote_collect_totals_before>
+	    </events>
+
+	</global>
+
+</config>

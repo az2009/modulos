@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<config>
+
+	<modules>
+		<Jefferson_Provador>
+			<version>0.1.0</version>
+		</Jefferson_Provador>
+	</modules>
+
+	<frontend>
+		<layout>
+			<updates>
+				<provador>
+					<file>jefferson/santazoi/provador.xml</file>
+				</provador>
+			</updates>
+		</layout>
+
+		<routers>
+			<provador>
+				<use>standard</use>
+				<args>
+					<module>Jefferson_Provador</module>
+					<frontName>provador</frontName>
+				</args>
+			</provador>
+
+			<checkout>
+               <args>
+                  <modules>
+                    <Jefferson_Provador before="Mage_Checkout">Jefferson_Provador</Jefferson_Provador>
+                  </modules>
+               </args>
+            </checkout>
+
+            <ajax>
+            	<args>
+                  <modules>
+                    <Jefferson_Provador before="Peerforest_Ajax">Jefferson_Provador</Jefferson_Provador>
+                  </modules>
+               </args>
+            </ajax>
+
+		</routers>
+
+		<translate>
+	        <modules>
+	            <jefferson_provador>
+	                <files>
+	                    <default>jefferson/santazoi/provador.csv</default>
+	                </files>
+	            </jefferson_provador>
+	        </modules>
+	    </translate>
+
+	</frontend>
+
+	<adminhtml>
+
+		<translate>
+	        <modules>
+	            <jefferson_provador>
+	                <files>
+	                    <default>jefferson/santazoi/provador.csv</default>
+	                </files>
+	            </jefferson_provador>
+	        </modules>
+	    </translate>
+
+		<acl>
+	    	<resources>
+	    		<admin>
+	    			<children>
+	    				<system>
+	    					<children>
+	    						<config>
+	    							<children>
+	    								<provador_options>
+	    									<title>Provador</title>
+	    								</provador_options>
+	    							</children>
+	    						</config>
+	    					</children>
+	    				</system>
+	    			</children>
+	    		</admin>
+	    	</resources>
+	    </acl>
+	</adminhtml>
+
+	<default>
+		<provador_options>
+			<provador_general>
+				<provador_sku_custom_options>provador-sim</provador_sku_custom_options>
+			</provador_general>
+		</provador_options>
+	</default>
+
+	<global>
+		<events>
+
+			<checkout_cart_product_add_after>
+                <observers>
+					<jefferson_provador_model_observer>
+						<type>singleton</type>
+						<class>Jefferson_Provador_Model_Observer</class>
+						<method>executeValidation</method>
+					</jefferson_provador_model_observer>
+				</observers>
+            </checkout_cart_product_add_after>
+
+            <controller_action_predispatch>
+				<observers>
+					<jefferson_provador_payment_methods>
+						<class>Jefferson_Provador_Model_Observer</class>
+						<method>setPaymentMethods</method>
+					</jefferson_provador_payment_methods>
+				</observers>
+			</controller_action_predispatch>
+
+			<controller_action_predispatch_checkout_onepage_index>
+				<observers>
+					<jefferson_provador_model_observer>
+						<type>singleton</type>
+						<class>Jefferson_Provador_Model_Observer</class>
+						<method>checkCart</method>
+					</jefferson_provador_model_observer>
+				</observers>
+			</controller_action_predispatch_checkout_onepage_index>
+
+
+			<controller_action_predispatch_firecheckout_index_index>
+				<observers>
+					<jefferson_provador_model_observer>
+						<type>singleton</type>
+						<class>Jefferson_Provador_Model_Observer</class>
+						<method>checkCart</method>
+					</jefferson_provador_model_observer>
+				</observers>
+			</controller_action_predispatch_firecheckout_index_index>
+
+	  	</events>
+
+		<blocks>
+			<catalog>
+				<rewrite>
+					<product_view_options_type_select>Jefferson_Provador_Block_Product_View_Options_Type_Select</product_view_options_type_select>
+				</rewrite>
+			</catalog>
+			<provador>
+				<class>Jefferson_Provador_Block</class>
+			</provador>
+
+		</blocks>
+
+	  	<helpers>
+	  		<provador>
+	  			<class>Jefferson_Provador_Helper</class>
+	  		</provador>
+	  	</helpers>
+
+   </global>
+
+</config>

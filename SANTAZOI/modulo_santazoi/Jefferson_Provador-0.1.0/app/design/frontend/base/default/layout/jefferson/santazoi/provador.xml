@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<layout>
+
+	<default>
+
+		<reference name="head">
+			<action method="addItem" ifconfig="provador_options/provador_general/provador_enabled"><type>skin_css</type><name>jefferson/santazoi/css/style.css</name></action>
+			<action method="addItem" ifconfig="provador_options/provador_general/provador_enabled"><type>skin_js</type><name>jefferson/santazoi/js/script.js</name></action>
+		</reference>
+
+	</default>
+
+	<catalog_product_view>
+
+		<block type="catalog/product_view" name="add.to.prov" template="jefferson/santazoi/addtocart.phtml" after="product.info.addtocart" />
+
+		<reference name="product.info.addtocart">
+			<action method="insert" ifconfig="provador_options/provador_general/provador_enabled"><block>add.to.prov</block></action>
+		</reference>
+
+		<action method="setTemplate" block="product.info.upsell" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/upsell.phtml</tpl>
+		</action>
+
+		<action method="setTemplate" block="catalog.product.related" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/related.phtml</tpl>
+		</action>
+
+	</catalog_product_view>
+
+		<action method="setTemplate" block="catalog.product.related" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/related.phtml</tpl>
+		</action>
+
+	<catalog_category_default>
+		<action method="setTemplate" block="product_list" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/list.phtml</tpl>
+		</action>
+	</catalog_category_default>
+
+	<catalog_category_view>
+		<action method="setTemplate" block="product_list" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/list.phtml</tpl>
+		</action>
+	</catalog_category_view>
+
+	<catalog_category_layered>
+		<action method="setTemplate" block="product_list" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/list.phtml</tpl>
+		</action>
+	</catalog_category_layered>
+
+	<checkout_cart_index>
+		<action method="setTemplate" block="checkout.cart.crosssell" ifconfig="provador_options/provador_general/provador_enabled">
+			<tpl>jefferson/santazoi/crosssell.phtml</tpl>
+		</action>
+	</checkout_cart_index>
+
+</layout>
+
+
+
+
+
+
+
+
+
+
+

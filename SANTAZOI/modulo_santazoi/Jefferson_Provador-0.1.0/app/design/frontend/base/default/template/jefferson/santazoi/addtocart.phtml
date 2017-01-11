@@ -1,0 +1,35 @@
+<?php
+$modules = Mage::getConfig()->getNode('modules')->children();
+$modulesArray = (array) $modules;
+if (isset($modulesArray['Jefferson_Provador'])) :
+    if (Mage::getStoreConfig('provador_options/provador_general/provador_enabled')) :
+
+        $helper = Mage::helper('provador');
+        $_product = $this->getProduct();
+        foreach ($_product->getOptions() as $_option) {
+            if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX) {
+                foreach ($_option->getValues() as $_value) {
+                    $option_id = $_value->getOptionId();
+                }
+            }
+        }
+        ?>
+
+<?php $buttonTitle = $this->__('Provar'); ?>
+
+<?php if($helper->getSkuCustomOption($option_id) ==  $helper->getSku()): ?>
+    <?php if($_product->isSaleable()): ?>
+<div class="add-to-cart add-to-prov">
+	<button type="button" title="<?php echo $buttonTitle ?>"
+		id="product-addtoprov-button" class="btn-prov"
+		onclick="prov_checked(); productAddToCartForm.submit(this)">
+		<span> <span><?php echo $buttonTitle ?></span>
+		</span>
+	</button>
+            <?php echo $this->getChildHtml('', true, true)?>
+        </div>
+<?php endif; ?>
+
+<?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>

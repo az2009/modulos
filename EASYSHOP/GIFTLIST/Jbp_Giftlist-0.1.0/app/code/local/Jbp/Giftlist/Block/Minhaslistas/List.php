@@ -1,0 +1,2 @@
+<?php
+class Jbp_Giftlist_Block_Minhaslistas_List extends Jbp_Giftlist_Block_Product_List {}

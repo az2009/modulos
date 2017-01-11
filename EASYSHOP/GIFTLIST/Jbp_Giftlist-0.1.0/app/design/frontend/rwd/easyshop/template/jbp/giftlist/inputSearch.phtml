@@ -1,0 +1,66 @@
+<?php if($this->getListActive()) $data = $this->getListActive(); ?>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <label for="cod_estados">Estado:</label>
+	<select name="jbpgae_estado" id="cod_estados" class="form-control validate-select">
+		<option value="" selected>Estado</option>
+		<?php foreach($this->getEstados() as $row): ?>
+		        <option value="<?php echo $row['cod_estados'] ?>" <?php if($data['jbpgae_estado'] == $row['cod_estados']) echo "selected";?>><?php echo $row['sigla'] ?></option>
+		<?php endforeach; ?>
+	</select>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	<label for="cod_cidades">Cidade:</label>
+	<span class="carregando" style="display: none">Aguarde, carregando...</span>
+	<select name="jbpgae_cidade" class="form-control validate-select" id="cod_cidades">
+		<option value="">-- Escolha um estado --</option>
+	</select>
+</div>
+
+<script type="text/javascript">
+jQuery(function(){
+
+	<?php if(!empty($data['jbpgae_cidade'])): ?>
+    	jQuery('#cod_estados').each(function(){
+    		if( jQuery(this).val() ) {
+    			jQuery('#cod_cidades').hide();
+    			jQuery('.carregando').show();
+    			jQuery.getJSON('<?php echo $this->getUrl('listaCasamento/index/cidades/')?>?search=',{cod_estados: jQuery(this).val(), ajax: 'true'}, function(j){
+    				var options = '<option value=""></option>';
+    				for (var i = 0; i < j.length; i++) {
+
+        					var code_cidade_selected = <?php echo $data['jbpgae_cidade'] ?>
+
+        					if(code_cidade_selected == j[i].cod_cidades){
+        						options += '<option value="' + j[i].cod_cidades + '" selected>' + j[i].nome + '</option>';
+        					}else{
+        						options += '<option value="' + j[i].cod_cidades + '" >' + j[i].nome + '</option>';
+        					}
+
+    				}
+    				jQuery('#cod_cidades').html(options).show();
+    				jQuery('.carregando').hide();
+    			});
+    		} else {
+    			jQuery('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
+    		}
+    	});
+	<?php endif;?>
+
+	jQuery('#cod_estados').change(function(){
+		if( jQuery(this).val() ) {
+			jQuery('#cod_cidades').hide();
+			jQuery('.carregando').show();
+			jQuery.getJSON('<?php echo $this->getUrl('listaCasamento/index/cidades/')?>?search=',{cod_estados: jQuery(this).val(), ajax: 'true'}, function(j){
+				var options = '<option value=""></option>';
+				for (var i = 0; i < j.length; i++) {
+					options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
+				}
+				jQuery('#cod_cidades').html(options).show();
+				jQuery('.carregando').hide();
+			});
+		} else {
+			jQuery('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
+		}
+	});
+});
+</script>

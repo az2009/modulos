@@ -1,0 +1,1 @@
+Módulo que implementa o plugin Ouibounce(https://github.com/carlsednaoui/ouibounce) no checkout quando o cliente vai sair da página, abre um form com algumas perguntas para saber porque o cliente esta saindo.

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Mdg_Giftregistry>
+			<version>0.1.0</version>
+		</Mdg_Giftregistry>
+	</modules>
+
+	<frontend>
+
+		<layout>
+			<updates>
+				<mdg_giftregistry>
+					<file>mdg_giftregistry.xml</file>
+				</mdg_giftregistry>
+			</updates>
+		</layout>
+
+		<routers>
+			<mdg_giftregistry>
+				<use>standard</use>
+				<args>
+					<module>Mdg_Giftregistry</module>
+					<frontName>giftregistry</frontName>
+				</args>
+			</mdg_giftregistry>
+		</routers>
+	</frontend>
+
+	<global>
+
+		<models>
+			<mdg_giftregistry>
+				<class>Mdg_Giftregistry_Model</class>
+			</mdg_giftregistry>
+		</models>
+
+		<blocks>
+
+			<mdg_giftregistry>
+				<class>Mdg_Giftregistry_Block</class>
+			</mdg_giftregistry>
+
+			<catalog>
+				<rewrite>
+					<product_view_options_type_select>Mdg_Giftregistry_Block_Product_View_Options_Type_Select</product_view_options_type_select>
+				</rewrite>
+			</catalog>
+
+			<core>
+				<rewrite>
+					<html_select>Mdg_Giftregistry_Block_Product_Html_Select</html_select>
+				</rewrite>
+			</core>
+
+			<adminhtml>
+				<rewrite>
+					<catalog_product_edit_tab_options_type_select>Mdg_Giftregistry_Block_Adminhtml_Customoptions_Type_Select</catalog_product_edit_tab_options_type_select>
+				</rewrite>
+				<rewrite>
+					<catalog_product_edit_tab_options_option>Mdg_Giftregistry_Block_Adminhtml_Customoptions_Options_Option</catalog_product_edit_tab_options_option>
+				</rewrite>
+			</adminhtml>
+
+		</blocks>
+
+		<helpers>
+			<mdg_giftregistry>
+				<class>Mdg_Giftregistry_Helper</class>
+			</mdg_giftregistry>
+		</helpers>
+
+		<resources>
+
+			<mdg_giftregistry_setup>
+
+				<setup>
+					<module>Mdg_Giftregistry</module>
+					<class>Mdg_Giftregistry_Model_Resource_Setup</class>
+				</setup>
+
+				<connection>
+					<use>core_setup</use>
+				</connection>
+
+			</mdg_giftregistry_setup>
+
+			<mdg_giftregistry_write>
+
+				<connection>
+					<use>core_write</use>
+				</connection>
+
+			</mdg_giftregistry_write>
+
+			<mdg_giftregistry_read>
+
+				<connection>
+					<use>core_read</use>
+				</connection>
+
+			</mdg_giftregistry_read>
+
+		</resources>
+	</global>
+</config>
+
+
+
+
+
+

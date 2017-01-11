@@ -1,0 +1,238 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$ajaxcart = Mage::getStoreConfig('mygeneral/product_list/ajaxcart');
+$newsaleicon = Mage::getStoreConfig('mygeneral/product_list/newsaleicon');
+$display_productname_singleline = Mage::getStoreConfig('mygeneral/product_list/display_productname_singleline');
+$image_aspect_ratio = Mage::getStoreConfig('mygeneral/product_list/image_aspect_ratio');
+$lazyload = Mage::getStoreConfig('mygeneral/product_slider/lazyload');
+$instance = Mage::helper("ExtraConfig");
+$_link = $this->getProduct();
+
+$imgWidth = 540;
+if($image_aspect_ratio == '1'){
+    $imgHeight = 0;
+} else {
+    $imgHeight = 720;
+}
+
+$page = $this->htmlEscape($_link->getPageLayout());
+
+    if ($page == '' || $page == "one_column") {
+	$page = 1;
+    }
+    elseif ($page == "two_columns_left" || $page == "two_columns_right") {
+	$page = 2;
+    }
+    elseif($page == "three_columns") {
+	$page = 3;
+    }
+    else {
+	$page = 0;
+    }
+?>
+<?php if(count($this->getItemCollection()->getItems())): ?>
+
+    <div class="section-line">
+	<h2><?php echo $this->__('Upsell Products') ?></h2>
+    </div>
+
+    <div id="upsell" class="products-grid itemslider">
+    <?php $i=0;$j=0; foreach($this->getItems() as $_link): ?>
+
+	<div class="item">
+
+		<div class="product-image-wrapper">
+
+		    <?php if($newsaleicon == '1') { ?>
+			<?php $adate = date('Y-m-d');  //echo 'frpm:-'.$_link->special_from_date.'----';echo "to:-".$_link->special_to_date.'--';
+				$a= 0;
+				if($_link->special_from_date != null && $_link->special_to_date == "")
+				{
+				    if( $adate >= $_link->special_from_date)
+				    {
+					    $a = 1;
+				    }
+				}
+				if($_link->special_from_date != "" && $_link->special_to_date != "")
+				{
+				    if($adate >= $_link->special_from_date && $adate <= $_link->special_to_date)
+				    {
+				    $a = 1;
+				    }
+				}
+
+				    if($a == 1){ ?>
+				   <div class="sale"><label><?php echo $this->__('SALE') ?></label></div>
+				    <?php } ?>
+
+
+			      <?php $bdate = date('Y-m-d');
+				$b= 0;
+				if($_link->news_from_date != null && $_link->news_to_date == "")
+				{
+				    if( $bdate >= $_link->news_from_date)
+				    {
+					    $b = 1;
+				    }
+				}
+				if($_link->news_from_date != "" && $_link->news_to_date != "")
+				{
+				    if($bdate >= $_link->news_from_date && $bdate <= $_link->news_to_date)
+				    {
+				    $b = 1;
+				    }
+				}
+				    if($b == 1){ ?>
+				   <div class="new"><label><?php echo $this->__('NEW') ?></label></div>
+				    <?php }
+				?>
+		    <?php } ?>
+
+                    <?php
+		    $class = "";
+
+		    $alterImage = Mage::helper("ExtraConfig")->getAltImgHtml($_link, $imgWidth, $imgHeight,'thumbnail');
+
+		    if($alterImage != false)
+		    {
+			     $class = 'small-image';
+		    }
+		    ?>
+		    <a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_link, 'small_image'), null, true) ?>" class="product-image">
+			<?php if($lazyload): ?>
+			    <img class="lazyOwl <?php echo $class; ?>" data-src="<?php echo $instance->getImage($_link, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_link, 'small_image'), null, true); ?>" />
+			<?php else: ?>
+			    <img class="<?php echo $class; ?>" src="<?php echo $instance->getImage($_link, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_link, 'small_image'), null, true); ?>" />
+			<?php endif; ?>
+			<?php  echo $alterImage; ?>
+		    </a>
+
+		    <div id='ajax_loader<?php echo $_link->getId()?>' class="ajaxcartpro_progress" style="display: none;"></div>
+
+		    <div class="actions">
+			<div class="btn-cart">
+			    <?php if($_link->isSaleable()): ?>
+				<?php if($ajaxcart == '1') { ?>
+				    <?php if ( !($_link->getTypeInstance(true)->hasRequiredOptions($_link) || $_link->isGrouped()) ) { ?>
+
+					<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart ajx-cart" onclick="setLocationAjax('<?php echo $this->getAddToCartUrl($_link) ?>','<?php echo $_link->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+
+					<?php //Adicionar para prova
+                                echo $this->getLayout()->createBlock('provador/provador')->getButtonAddToProv($_link); ?>
+
+				    <?php } else { ?>
+					<?php if(Mage::helper("ExtraConfig")->is_mobile() == false) { ?>
+					    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="showOptions('<?php echo $_link->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+					    <a href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_link->getId()));?>' class='fancybox' id='fancybox<?php echo $_link->getId()?>' style='display:none'></a>
+					<?php } else { ?>
+					    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_link) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+					<?php }  ?>
+				    <?php }  ?>
+				<?php } else { ?>
+				    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_link) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+				<?php } ?>
+			    <?php else: ?>
+				<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+			    <?php endif; ?>
+			</div>
+
+			<ul class="add-to-links addto-links-icons">
+			    <?php if($ajaxcart == '1') { ?>
+			    <li class="first">
+				    <a href='<?php echo $this->getUrl('ajax/index/options',array('product_id'=>$_link->getId()));?>' class='fancybox tooltip_container' id='quickview-fancybox<?php echo $_link->getId()?>'><span class="icon fa fa-search-plus"></span><span class="tooltip"><?php echo $this->__('Ver Produto') ?></span></a>
+			    </li>
+			    <?php } ?>
+			    <li>
+			    <?php if($_compareUrl=$this->getAddToCompareUrl($_link)): ?>
+				<a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare tooltip_container"><span class="icon fa fa-exchange"></span><span class="tooltip"><?php echo $this->__('Add to Compare') ?></span></a>
+			    <?php endif; ?>
+			    </li>
+			    <li class="last">
+				<?php if ($this->helper('wishlist')->isAllow()) : ?>
+				    <a href="<?php echo $this->helper('wishlist')->getAddUrl($_link) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist tooltip_container"><span class="icon fa fa-star"></span><span class="tooltip"><?php echo $this->__('Add to Wishlist') ?></span></a>
+				<?php endif; ?>
+			    </li>
+			</ul>
+		    </div>
+
+		</div>
+
+		<div class="product-content-wrapper">
+		    <div class="product-content">
+			    <h3 class="product-name<?php if($display_productname_singleline == '1'){ ?> single-line-name<?php } ?>"><a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->stripTags($_link->getName(), null, true) ?>"><?php echo $this->htmlEscape($_link->getName()); ?></a></h3>
+			    <div class="vert">
+				<?php echo $this->getPriceHtml($_link, true) ?>
+			    </div>
+			    <?php echo $this->getReviewsSummaryHtml($_link, false, true); ?>
+		    </div>
+		</div>
+
+            </div>
+    <?php endforeach ?>
+    </div>
+    <script type="text/javascript">decorateTable('upsell-product-table')</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(function(j$) {
+j$("#upsell").owlCarousel({
+    itemsCustom : [
+	<?php if ($page == 1) : ?>
+	    [0, 1],
+	    [380, 2],
+	    [751, 4],
+	    [1265, 4],
+	    [1360, 4],
+	    [1440, 4],
+	    [1680, 4]
+	<?php elseif ($page == 2) : ?>
+	    [0, 1],
+	    [380, 2],
+	    [751, 3],
+	    [1265, 3],
+	    [1360, 3],
+	    [1440, 3],
+	    [1680, 3]
+	<?php elseif ($page == 3) : ?>
+	    [0, 1],
+	    [380, 2],
+	    [751, 2],
+	    [943, 2],
+	    [1265, 2],
+	    [1360, 2],
+	    [1440, 2],
+	    [1680, 2]
+	<?php endif; ?>
+    ]<?php  echo Mage::helper("ExtraConfig")->sliderSetting(); ?>
+});
+});
+//]]>
+</script>
+
+<?php endif ?>

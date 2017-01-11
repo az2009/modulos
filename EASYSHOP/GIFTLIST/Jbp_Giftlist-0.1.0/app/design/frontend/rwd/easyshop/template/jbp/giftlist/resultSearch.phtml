@@ -1,0 +1,61 @@
+<?php $result = $this->getListSearch(); ?>
+
+<div class="container-fluid rp-max">
+
+    <div class="row box-searchList-gift">
+    <?php if(count($result)):?>
+            <?php foreach($this->getListSearch() as $list): ?>
+            
+            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min rp-max box-list-result">
+            		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            			<div class="interno-gif">
+                        	<div class="mask-box-result img-r">
+                            	<div class="background-fundo">
+                                	<?php if(!empty($list['jbpgl_banner'])):?>
+                                		<img src="<?php echo $this->_getHelper()->getPathImage($list['jbpgl_banner'])?>" />
+        							<?php else:?>
+        								<img src="<?php echo $this->_getHelper()->getPathImage(Mage::helper('jbp_giftlist/config')->getImageDefault())?>" />
+        							<?php endif;?>							
+                            	</div>                        
+                        	</div>                      
+                    	</div>
+                	</div>
+            	
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content-giflist-search">
+                    	<div class="interno-gif">
+                        	<div class="mask-box-result"></div>                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno name-gr">
+                                <a href="<?php echo $this->getUrl('listaCasamento/index/listaCasamentoProdutos/', array('id'=>$list['jbpgl_id'])) ?>">
+                                    <strong>Noivo: </strong><?php echo $list['jbpgl_name_noivo']?>                                    
+                                </a>
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                <a href="<?php echo $this->getUrl('listaCasamento/index/listaCasamentoProdutos/', array('id'=>$list['jbpgl_id'])) ?>">
+                                    <strong>Noiva: </strong><?php echo $list['jbpgl_name_noiva']?>
+                                    
+                                </a>
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">                                
+                                <strong>Data do evento: </strong> <?php echo date('d/m/Y',strtotime($list['jbpgl_event_date'])) ?>                                
+                            </div>
+    
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                <strong>Cidade: </strong> <?php echo $this->getCidadeByCode($list['jbpgae_cidade']).', '.$this->getEstadosByCode($list['jbpgae_estado']) ?>
+                                
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                <button class="button btn btn-default btn-search-gift" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/listaCasamentoProdutos/', array('id'=>$list['jbpgl_id'])) ?>')">Ver lista</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+    <?php else:?>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        	<span><?php echo $this->__('Nenhuma lista encontrada')?></span>
+    	</div>
+    <?php endif;?>
+    </div>
+</div>

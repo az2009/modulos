@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+    	<catalog>
+    		<groups>
+    			<jbp_featuredbycategory_product_clickview>
+    				<label>Random produtos relacionados</label>
+    				<sort_order>99</sort_order>
+    				<show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+	                    <fields>
+	                    	<jbp_theme_attribute translate="label">
+	                        	<label>Atributos</label>
+	                        	<frontend_type>text</frontend_type>
+	                        	<sort_order>1</sort_order>
+	                            <show_in_default>1</show_in_default>
+	                            <show_in_website>1</show_in_website>
+	                            <show_in_store>1</show_in_store>
+	                            <comment>Informe os atributos na ordem que deseja que o módulo pesquisa</comment>
+	                        </jbp_theme_attribute>
+	                    </fields>
+    			</jbp_featuredbycategory_product_clickview>
+    			
+    			<jbp_featuredbycategory_product_parcelamento>
+    				<label>Quantidade de parcelamento</label>
+    				<sort_order>99</sort_order>
+    				<show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+	                    <fields>
+
+	                    	<jbp_theme_attribute translate="label">
+	                        	<label>Quantidade</label>
+	                        	<frontend_type>text</frontend_type>
+	                        	<sort_order>1</sort_order>
+	                            <show_in_default>1</show_in_default>
+	                            <show_in_website>1</show_in_website>
+	                            <show_in_store>1</show_in_store>
+	                            <comment>Informe a quantidade máxima de parcela do produto</comment>
+	                        </jbp_theme_attribute>
+
+	                        <jbp_theme_attribute_app translate="label">
+	                        	<label>Quantidade App</label>
+	                        	<frontend_type>text</frontend_type>
+	                        	<sort_order>1</sort_order>
+	                            <show_in_default>1</show_in_default>
+	                            <show_in_website>1</show_in_website>
+	                            <show_in_store>1</show_in_store>
+	                            <comment>Informe a quantidade máxima de parcela do produto visualizado no App</comment>
+	                        </jbp_theme_attribute_app>
+	                        
+	                    </fields>
+    			</jbp_featuredbycategory_product_parcelamento>
+    			
+    		</groups>
+
+	    </catalog>
+
+    </sections>
+</config>

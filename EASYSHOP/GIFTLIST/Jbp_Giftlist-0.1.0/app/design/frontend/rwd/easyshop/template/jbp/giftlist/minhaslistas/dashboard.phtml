@@ -1,0 +1,153 @@
+<div class="page-title">
+	<h1><?php echo $this->__('Lista de presente finalizada')?></h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    
+        		  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min rp-max">
+        		  	<div class="head-interno head1">
+                    	  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    	  	 <div class="interno text-g">
+                                  <p class="txt-p">Aqui você encontra tudo para administrar sua lista de casamento. Você pode escolher os presentes, verificar os que já foram                  
+                				  comprados, além de solicitar a entrega, quando achar melhor.</p>
+            				 </div>
+        				  </div>
+        				  
+        				  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        				  	<div class="interno">
+            				  	<button type="button" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/minhaslistas/') ?>')" class="button btn btn-default pull-right btn-gift">
+            				  		Todas as listas
+            				  	</button>                                
+                            </div>
+        				  </div>    			
+    				</div>	  
+				  </div>
+				  
+				  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  rp-min rp-max">
+    				
+            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min rp-max">
+                        <div class="box-geral">
+                        	<?php $param = $this->getRequest()->getParam('item')?>
+                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 item-col-gift <?php echo ($param == 'produtosDesejados') ? $param.' current-gift':'disabled-box' ?>">
+                             	<a href="<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosDesejados', 'id'=>$this->getListViewId()))?>" class="link-item-gift">
+                                 	<div class="interno">
+                                        
+                                        <span>
+                                        	<span id="btn-quero-ganhar" class="acc-btn">Quero ganhar</span>
+                                    	</span>
+                                        
+                                        <div class="box-body off-acc" data="btn-quero-ganhar">
+                                        	<label>                                        	
+                                        		<span class="">
+                                        			<span class="label-opaca">Quantidade de produtos</span>
+                                        			<span class="label-qty"><?php echo count($this->_getHelper()->checkItemTotal())?></span>
+                                    			</span>
+                                    		</label>
+                                    		<i onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosDesejados', 'id'=>$this->getListViewId()))?>')" class="fa fa-angle-right" aria-hidden="true"></i>
+                                    	</div>
+                                    </div>
+                                </a>                                
+                            </div>
+                	
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 item-col-gift  <?php echo ($param == 'produtosGanhos') ? $param.' current-gift':'disabled-box' ?>">
+                            	<a href="<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosGanhos', 'id'=>$this->getListViewId()))?>" class="link-item-gift">
+                                	<div class="interno">
+                                        <span><span id="btn-ja-ganhei" class="acc-btn">Já Ganhei</span></span>
+                                        <div class="box-body off-acc" data="btn-ja-ganhei">
+                                        
+                                            <span class="price">
+                                            	<span class="label-opaca">Quantidade de produtos</span>
+                                            	<span class="label-qty"><?php echo $this->totalQty?></span>
+                                        	</span>
+                                        	
+                                        	<span class="qty-product">
+                                            	<span class="label-opaca">Total ganhado R$ </span>
+                                            	<span class="label-qty"><?php echo str_replace('R$','',$this->totalValue)?></span>
+                                        	</span>
+                                        	
+                                        	<i onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosGanhos', 'id'=>$this->getListViewId()))?>')" class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </a>                                
+                            </div>
+        
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 item-col-gift  <?php echo ($param == 'produtosResgatados') ? $param.' current-gift':'disabled-box' ?>">
+                            	<a href="<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosResgatados', 'id'=>$this->getListViewId()))?>" class="link-item-gift">
+                                	<div class="interno">
+                                        <span><span id="btn-resgatado" class="acc-btn">Resgatado</span></span>
+                                        <div class="box-body off-acc" data="btn-resgatado">
+                                            <span class="price">
+                                            	<span class="label-opaca">Quantidade de produtos</span>
+                                            	<span class="label-qty"><?php echo $this->totalQtyRansomed?></span>
+                                        	</span>
+                                        	<span>
+                                            	<span class="label-opaca">Total resgatado R$</span>
+                                            	<span class="label-qty"><?php echo str_replace('R$','', Mage::helper('core')->currency($this->totalValueRansomed, true, false))?></span>
+                                        	</span>
+                                            <i onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('item' => 'produtosResgatados', 'id'=>$this->getListViewId()))?>')" class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </div>            
+                                    </div>
+                                </a>                                
+                            </div>
+        
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 item-col-gift <?php echo ($param == 'resgatarProdutos') ? $param.' current-gift':'disabled-box' ?>">
+                            	<a href="javascript:void(0)" class="link-item-gift">
+                                	<div class="interno">
+                                        <span><span id="btn-resgatar-presente" class="acc-btn">Resgatar presentes</span></span>
+                                        <div class="box-body off-acc" data="btn-resgatar-presente">
+                                            <span class="">
+                                            	<span class="label-opaca">Valor à resgatar R$ </span>
+                                            	<span class="label-qty">
+                                            		<?php if($this->getCouponOfList()->getData('jbpgl_coupon_credit') && ($this->getCouponOfList()->getData('jbpgl_balance') > 0) && $this->_getHelper()->isValidCoupon($this->getCouponOfList()->getData('jbpgl_coupon_credit'))): ?>
+                                                    	<span class=""><?php echo Mage::helper('core')->currency(0,true,false)?></span>
+                                                    <?php else:?>
+                                                    	<span class=""><?php echo Mage::helper('core')->currency($this->getSaldoDisponivelParaResgate(),true,false)?></span>
+                                                    <?php endif;?>
+                                        		</span>                                            	                                            	                                                                               
+                                        	</span>                                            	
+                                        </div>                                        
+                                    </div>
+                                </a>                                
+                            </div>                    
+                		</div>                		
+            		</div>
+                
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min">
+                    	<div class="interno">
+                        	<?php echo $this->getChildHtml('list.item.giftlist')?>
+                    	</div>
+                    </div>        
+        
+    </div>
+</div>
+
+<script>
+	jQuery(function(){
+
+		jQuery('.link-item-gift').click(function(){
+			if(jQuery(window).width() <= 767){
+				return false;
+			}
+		});
+		
+		jQuery('.acc-btn').click(function(){
+			if(jQuery(window).width() <= 767){
+    			var id = jQuery(this).attr('id');
+    			console.log(id);
+    			var element = '.box-body[data*="'+id+'"]';
+    			if(jQuery(element).hasClass('on-acc')){
+    				jQuery(element).addClass('off-acc');
+    				jQuery(element).removeClass('on-acc');	
+    			}else{
+    				jQuery(element).addClass('on-acc');
+    				jQuery(element).removeClass('off-acc');
+    			}
+			}			
+		});
+
+		if(jQuery(window).width() <= 767){
+			var id = jQuery('.<?php echo $param?> .interno .box-body').removeClass('off-acc').addClass('on-acc');
+		}
+		
+	});
+</script>

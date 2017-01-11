@@ -1,0 +1,107 @@
+<?php $result = $this->getListsAll(); ?>
+
+<div class="container-fluid rp-max">
+    <div class="row box-searchList-gift">
+    <?php if(count($result)):?>
+            <?php foreach($result as $list): ?>
+            
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-min rp-max box-list-result">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                			<div class="interno-gif">
+                				<div class="mask-box-result img-r">
+                                	<div class="background-fundo">
+                                	<?php if(!empty($list['jbpgl_banner'])):?>
+                                		<img src="<?php echo $this->_getHelper()->getPathImage($list['jbpgl_banner'])?>" />
+        							<?php else:?>
+        								<img src="<?php echo $this->_getHelper()->getPathImage(Mage::helper('jbp_giftlist/config')->getImageDefault())?>" />
+        							<?php endif;?>							
+                                	</div>                        
+                            	</div>    
+                        	</div>
+                    	</div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content-giflist-search">
+                        	<div class="interno-gif">
+                        		<div class="mask-box-result"></div>
+                        		
+                        		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno name-gr">
+                                    <a 
+                                    <?php if(!$list['jbpgl_active']):?>
+                                    	href="<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('id'=>$list['jbpgl_id'], 'item' => 'produtosDesejados')) ?>"
+                                    <?php else:?>
+                                    	href="<?php echo $this->getUrl('listaCasamento/index/minhalista/',array('item' => 'produtosDesejados')) ?>"
+                                    <?php endif;?>
+                                    >
+                                        <strong>Noivo: </strong><?php echo $list['jbpgl_name_noivo']?>
+                                    </a>
+                                </div>
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                   <a 
+                                    	<?php if(!$list['jbpgl_active']):?>
+                                    		href="<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('id'=>$list['jbpgl_id'], 'item' => 'produtosDesejados')) ?>"
+                                    	<?php else:?>
+                                    		href="<?php echo $this->getUrl('listaCasamento/index/minhalista/',array('item' => 'produtosDesejados')) ?>"
+                                        <?php endif;?>	
+                                    	>
+                                        <strong>Noiva: </strong><?php echo $list['jbpgl_name_noiva']?>
+                                    </a>
+                                </div>
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">                                
+                                    <strong>Data do casamento: </strong> <?php echo date('d/m/Y',strtotime($list['jbpgl_event_date'])) ?>                                
+                                </div>
+                                 
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                    <strong>Cidade: </strong> <?php echo $this->getCidadeByCode($list['jbpgae_cidade']).', '.$this->getEstadosByCode($list['jbpgae_estado']) ?>                                
+                                </div>
+                                
+                                <?php if($list['jbpgl_coupon_credit']):?>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                    	<strong>Cupom</strong>
+                                        <?php echo $list['jbpgl_coupon_credit']; ?>
+                                        <?php if($this->_getHelper()->isValidCoupon($list['jbpgl_coupon_credit'])): ?>
+                                        	  - <span style="color:red">indisponível</span>
+                                        <?php else:?>
+                                        	  - <span style="color:green">disponível</span>
+                                        <?php endif;?>
+                                        
+                                    </div>
+                        		<?php endif;?>
+                        		
+                        		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                            		<strong>Status da lista</strong>
+                                    <?php echo ($list['jbpgl_active']) ? '<span style="color:blue">Ativada</span>':'<span style="color:gray">Desativado</span>' ?>                                    
+                        		</div>
+                        		
+                        		<?php if($list['jbpgl_balance'] > 0):?>
+                        			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                            			<strong>Saldo de crédito</strong>
+                            			<?php echo Mage::helper('core')->currency($list['jbpgl_balance'], true, false) ?>
+                                        <?php if($this->_getHelper()->isValidCoupon($list['jbpgl_coupon_credit'])): ?>
+                                        	<span style="color:red"> -<?php echo Mage::helper('core')->currency($list['jbpgl_balance'], true, false)?></span>
+                                        <?php endif;?>
+                        			</div>
+                        		<?php endif;?>
+                        		
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 item-interno">
+                                	<button 
+                                    class="button btn btn-default btn-search-gift" 
+                                    <?php if(!$list['jbpgl_active']):?>
+                                    	onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/viewlist/', array('id'=>$list['jbpgl_id'], 'item' => 'produtosDesejados')) ?>')"
+                                	<?php else:?>
+                                		onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/minhalista/',array('item' => 'produtosDesejados')) ?>')"
+                                    <?php endif;?>
+                                    >Ver lista</button>
+                                </div>
+                        				        
+                            </div>
+
+                        </div>
+                    </div><br /><br />
+            <?php endforeach; ?>
+    <?php else:?>
+        <div class="col-lg-12"><span>Você ainda não criou nenhuma lista <label for="criarLista"> Criar Agora</label></span></div>
+    <?php endif;?>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" 
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+    	<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />                        
+            
+             <complexType name="featuredbycategoryEntity">
+                <all>
+                    <element name="product_ids" type="xsd:array" minOccurs="0" />                    
+                </all>
+            </complexType>
+            
+            <complexType name="featuredbycategoryEntityArray">
+			 	<complexContent>
+			 		<restriction base="soapenc:Array">
+			 			<attribute ref="soapenc:arrayType" wsdl:arrayType="typens:featuredbycategoryEntity[]" />
+			 		</restriction>
+			 	</complexContent>
+			</complexType>
+			
+			<complexType name="featuredbycategoryBestsellerEntity">
+                <all>
+                    <element name="transfer_id" type="xsd:array" minOccurs="0" />                    
+                </all>
+            </complexType>
+            
+            <complexType name="featuredbycategoryBestsellerEntityArray">
+			 	<complexContent>
+			 		<restriction base="soapenc:Array">
+			 			<attribute ref="soapenc:arrayType" wsdl:arrayType="typens:featuredbycategoryBestsellerEntity[]" />
+			 		</restriction>
+			 	</complexContent>
+			</complexType>
+			            
+        </schema>
+    </types>
+    
+    <message name="featuredbycategoryGetproductbyfilterRequest">
+	 	<part name="sessionId" type="xsd:string" />
+	 	<part name="typeLoop" type="xsd:string" />
+	 	<part name="size" type="xsd:string" />
+	 	<part name="categoryId" type="xsd:string" />
+	 	<part name="page" type="xsd:string" />
+	 	<part name="idprod" type="xsd:string" />
+	 	<part name="general" type="xsd:string" />	 		 	
+	</message>
+	 
+	<message name="featuredbycategoryGetproductbyfilterResponse">
+	 	<part name="result" type="typens:featuredbycategoryEntity" />
+    </message>
+    
+    <message name="featuredbycategoryBestsellerGetproductbestsellerRequest">
+	 	<part name="sessionId" type="xsd:string" />
+	 	<part name="typeLoop" type="xsd:string" />
+	 	<part name="size" type="xsd:int" />
+	 	<part name="categoryId" type="xsd:int" />	 		 	
+	</message>
+	 
+	<message name="featuredbycategoryBestsellerGetproductbestsellerResponse">
+	 	<part name="result" type="typens:featuredbycategoryBestsellerEntity" />
+    </message>
+    
+    <portType name="{{var wsdl.handler}}PortType">    	
+    	<operation name="featuredbycategoryBestsellerGetproductbestseller">
+			 <documentation>Retorna uma lista de produtos de acordo com os parametros passados</documentation>
+			 <input message="typens:featuredbycategoryBestsellerGetproductbestsellerRequest" />
+			 <output message="typens:featuredbycategoryBestsellerGetproductbestsellerResponse" />
+		</operation>		
+		
+		<operation name="featuredbycategoryGetproductbyfilter">
+			 <documentation>
+			 	Retorna uma lista de produtos de acordo com os parametros passados
+			 	Parametros recebidos
+			 	    /**
+			 	     * sessionId : Sessão iniciada do soap
+			 	        - string
+			 	        			 	        
+				     * typeLoop :   Tipo de loop que deseja pegar
+			 	        - string
+			 	          - bestseller
+			 	          - deals
+			 	          - featured
+			 	          - mostviewed
+			 	          - newsproducts
+			 	          - whitelistproducts
+			 	          - recommended
+			 	          			 	          			 	          				     
+				     * size :       Tamanho da collection que deseja retornar
+				        - int
+				          
+				     * categoryId : ID da categoria que deseja filtrar
+				        - int
+				        
+				     * page :       Número da paginação
+				        - int 
+				        				        
+				     * idprod :     ID do produto que foi clicado
+				        - int
+				        - default null
+				     */				     
+			 </documentation>
+			 <input message="typens:featuredbycategoryGetproductbyfilterRequest" />
+			 <output message="typens:featuredbycategoryGetproductbyfilterResponse" />
+		</operation>		
+    </portType>
+    
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">        
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />        
+        <operation name="featuredbycategoryGetproductbyfilter">            
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />            
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        
+        <operation name="featuredbycategoryBestsellerGetproductbestseller">            
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />            
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>                
+    </binding>
+        
+</definitions>

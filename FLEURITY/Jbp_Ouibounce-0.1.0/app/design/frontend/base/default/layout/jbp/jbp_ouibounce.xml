@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<layout>
+
+	<checkout_cart_index>
+		<reference name="head">
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_js</type><name>js/jbp/ouibounce/ouibounce.min.js</name></action>
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_js</type><name>js/jbp/ouibounce/script.js</name></action>
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_css</type><name>css/jbp/ouibounce/modal.css</name></action>
+		</reference>
+		<reference name="content">
+			<block type="jbp_ouibounce/ouibounce" name="ouibounce_front" template="jbp/ouibounce/modal.phtml" />
+		</reference>
+	</checkout_cart_index>
+
+	<firecheckout_index_index>
+		<reference name="head">
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_js</type><name>js/jbp/ouibounce/ouibounce.min.js</name></action>
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_js</type><name>js/jbp/ouibounce/script.js</name></action>
+			<action method="addItem" ifconfig="ouibounce_config/ouibounce_general/ouibounce_enabled"><type>skin_css</type><name>css/jbp/ouibounce/modal.css</name></action>
+		</reference>
+		<reference name="content">
+			<block type="jbp_ouibounce/ouibounce" name="ouibounce_front" template="jbp/ouibounce/modal.phtml" />
+		</reference>
+	</firecheckout_index_index>
+
+</layout>

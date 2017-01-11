@@ -1,0 +1,136 @@
+<?php if($this->getListActive()) $data = $this->getListActive(); ?>
+
+<div class="container-fluid giftlist-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-ms-12 col-xs-12 rp-min">
+            <form id="formCriarLista" action="<?php echo $this->getUrl('listaCasamento/index/criarListaPost/') ?>" method="post" enctype="multipart/form-data">
+                <?php echo $this->getBlockHtml('formkey')?>
+                <input type="hidden" name="jbpgl_customer_id" value="<?php echo Mage::getSingleton('customer/session')->getId()?>" />
+                <?php $currentTimestamp = Mage::getModel('core/date')->timestamp(time()); ?>
+                <input type="hidden" name="jbpgl_created_at" value="<?php echo date('Y-m-d h:i:s', $currentTimestamp)?>" />
+                <input type="hidden" name="jbpgl_store_id" value="<?php echo Mage::app()->getStore()->getStoreId() ?>" />
+
+                <?php if($data['jbpgl_id'] && $data['jbpgl_event_address_id']):?>
+                    <input type="hidden" name="jbpgl_id" value="<?php echo $data['jbpgl_id'] ?>" />
+                    <input type="hidden" name="jbpgl_event_address_id" value="<?php echo $data['jbpgl_event_address_id'] ?>" />
+                <?php endif; ?>
+
+                <div class="container-box-1">
+						
+						<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 box-1-f rp-max">
+                            <div class="panel panel-default">
+        
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title"><span>Cadastro da lista de casamento</span></h3>
+                                  </div>        
+                                  <div class="panel-body">
+        
+                                        <div class="form-group">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <label for="jbpgl_name_noivo">Nome do noivo</label>
+                                                <input placeholder="Nome do noivo" type="text" id="jbpgl_name_noivo" class="form-control required-entry" value="<?php echo $data['jbpgl_name_noivo']?>" name="jbpgl_name_noivo" />
+                                            </div>
+        
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <label for="jbpgl_name_noiva">Nome da noiva</label>
+                                                <input placeholder="Nome do noiva" type="text" id="jbpgl_name_noiva" class="form-control required-entry" value="<?php echo $data['jbpgl_name_noiva']?>" name="jbpgl_name_noiva" />
+                                            </div>
+        
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <label for="jbpgl_event_date">Data do casamento</label>
+                                                <input placeholder="Data do casamento" type="text" id="jbpgl_event_date" name="jbpgl_event_date" value="<?php echo (!empty($data['jbpgl_event_date']) ? date('d/m/Y',strtotime($data['jbpgl_event_date'])) : '' ) ?>" class="form-control required-entry">
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    	                                        <label for="banner">Imagem de fundo</label>
+    	                                        <div class="box-field-file">
+                                                	<input type="file" id="jbpgl_banner" name="jbpgl_banner" class="form-control" />
+                                                	<div class="mask-field-file">
+                                                		<label for="jbpgl_banner" class="label-file">Escolher arquivo</label>
+                                                	</div>
+                                            	</div>
+                                            </div>
+                                        </div>
+    					    
+                                        <div class="form-group">
+                                            <?php echo $this->getChildHtml('search.input.giftlist')?>
+                                        </div>
+            
+                                        <div class="form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <label for="jbpgl_description">Mensagem do Casal</label>
+                                                <textarea class="form-control" class="form-control required-entry" name="jbpgl_description" id="jbpgl_description" placeholder="Mensagem do casal - informe sua mensagem para os convidados"><?php echo $data['jbpgl_description'] ?></textarea>
+                                            </div>
+                                        </div>
+        
+                                  </div>
+        
+                            </div>
+                        </div>
+
+						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 rp-max">
+                            <div class="panel panel-default">
+        
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title">Endereço de cobrança</h3>
+                                  </div>        
+                                  <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div id="containerListAddress">
+                                                    <?php echo $this->getChildHtml('lis_address_giftlist') ?>
+                                                </div>
+                                                <button type="button" class="button btn btn-default pull-right" data-toggle="modal" data-target="#myModalAd">
+                                                	Entregar em outro endereço
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <?php if(!$data['jbpgl_event_shipping_id']):?>
+                                                <div class="checkbox col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <label  for="jbpgl_termos">                                                
+                                                      	<input type="checkbox" name="jbpgl_termos" id="jbpgl_termos" class="required-entry input-check" />
+                                                      	<span class="span-add">Aceito os <a href="#">Termos de uso</a> da lista de casamento</span>
+                                                    </label>
+                                                </div>
+                                            <?php endif;?>
+                                        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                                                
+                                                <button type="submit" class="btn button btn-default pull-right">Salvar lista</button>
+                                                <button type="button" onclick="setLocation('<?php echo $this->getUrl('listaCasamento/index/minhaslistas/') ?>')" class="button btn btn-default btn-cancel pull-right">Cancelar</button>
+                                            </div>
+                                        </div>
+                                  </div>        
+                            </div>
+                        </div>
+
+                </div>
+            </form>
+            <?php echo $this->getChildHtml('address_giftlist') ?>
+        </div>
+    </div>
+</div>
+
+<script>
+jQuery(function(){
+
+	jQuery('#day, #month, #year').addClass('required-entry');
+	jQuery("#jbpgl_event_date").datepicker({
+    		dateFormat: 'dd/mm/yy',
+    	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    	    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    	    nextText: 'Próximo',
+    	    prevText: 'Anterior'
+    });
+
+    
+    
+});
+</script>
+
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new VarienForm('formCriarLista');
+    //]]>
+</script>

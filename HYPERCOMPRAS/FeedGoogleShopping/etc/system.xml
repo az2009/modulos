@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<feedgoogleshopping translate="label" module="hc_feedgoogleshopping">
+			<label>Integrações xml</label>
+			<sort_order>99999</sort_order>
+		</feedgoogleshopping>
+	</tabs>
+	<sections>
+		<feedgoogleshopping_config translate="label" module="hc_feedgoogleshopping">
+			<label>Gerar Feed</label>
+			<tab>feedgoogleshopping</tab>
+			<frontend_type>text</frontend_type>
+            <sort_order>20</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            	<groups translate="label">
+
+            		<feedgoogleshopping_general>
+	            			<label>General</label>
+	            			<frontend_type>text</frontend_type>
+		                    <sort_order>1</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+
+	                    	<fields>
+
+	                    		<feedgoogleshopping_enabled translate="label">
+	                    			<label>Enabled Google Shopping</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </feedgoogleshopping_enabled>
+							    
+							    <feedzoom_enabled translate="label">
+	                    			<label>Enabled Zoom</label>
+	                    			<frontend_type>select</frontend_type>
+	                    			<source_model>adminhtml/system_config_source_yesno</source_model>
+							        <sort_order>1</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </feedzoom_enabled>
+							    							<!-- Cabeçalho -->
+	                    		<feedgoogleshopping_title_feed translate="label">
+	                    			<label>Título do Feed</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>10</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </feedgoogleshopping_title_feed>
+
+							    <feedgoogleshopping_link_feed translate="label">
+	                    			<label>Link do Feed</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>20</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </feedgoogleshopping_link_feed>
+
+							    <feedgoogleshopping_description_feed translate="label">
+	                    			<label>Descrição do Feed</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>30</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							    </feedgoogleshopping_description_feed>
+						    <!-- Cabeçalho -->
+
+	                    	</fields>
+
+            		</feedgoogleshopping_general>
+
+            		<feedgoogleshopping_attributes>
+            			<label>Google Shopping</label>
+            			<frontend_type>text</frontend_type>
+	                    <sort_order>20</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                    <comment><![CDATA[Mapeamento dos atributos dos produtos com os campos do xml do Google Shopping, caso queira um
+	                    valor diferente, informe o código do atributo no campo de texto que deseja alterar, os atributos abaixo aceitam
+	                    apenas atributos do tipo text, exceto o campo de texto Marca. <a style="color:#FC9548" href="http://hypercompras.com.br/index.php/feedgoogleshopping/index/index" target="_blank"><strong>Gerar o Feed</strong></a>]]></comment>
+
+	                    	<fields>
+
+						    <!-- Item -->
+
+						    	<feedgoogleshopping_id translate="label">
+	                    			<label>ID</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>40</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:id</comment>
+							    </feedgoogleshopping_id>
+
+							    <feedgoogleshopping_title translate="label">
+	                    			<label>Título</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>50</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:title</comment>
+							    </feedgoogleshopping_title>
+
+							    <feedgoogleshopping_description translate="label">
+	                    			<label>Descrição</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>60</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:description</comment>
+							    </feedgoogleshopping_description>
+
+							    <feedgoogleshopping_price translate="label">
+	                    			<label>Preço</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>70</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:price</comment>
+							    </feedgoogleshopping_price>
+
+							    <feedgoogleshopping_special_price translate="label">
+	                    			<label>Preço Promocional</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>80</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:sale_price</comment>
+							    </feedgoogleshopping_special_price>
+
+							    <feedgoogleshopping_image_link translate="label">
+	                    			<label>Imagem Link</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>110</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:image_link</comment>
+							    </feedgoogleshopping_image_link>
+
+							    <feedgoogleshopping_brand translate="label">
+	                    			<label>Marca</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>120</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:brand</comment>
+							    </feedgoogleshopping_brand>
+
+							    <feedgoogleshopping_google_product_category translate="label">
+	                    			<label>Categoria</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>130</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:google_product_category</comment>
+							    </feedgoogleshopping_google_product_category>
+
+
+							    <feedgoogleshopping_product_type translate="label">
+	                    			<label>Product Type Category</label>
+	                    			<frontend_type>text</frontend_type>
+							        <sort_order>140</sort_order>
+							        <show_in_default>1</show_in_default>
+							        <show_in_website>1</show_in_website>
+							        <show_in_store>1</show_in_store>
+							        <comment>g:product_type</comment>
+							    </feedgoogleshopping_product_type>
+						    <!-- Item -->
+
+	                    	</fields>
+
+            		</feedgoogleshopping_attributes>
+            		
+            		<feedzoom_attributes>
+            			<label>Zoom</label>
+            			<frontend_type>text</frontend_type>
+	                    <sort_order>20</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                    <comment><![CDATA[Mapeamento dos atributos dos produtos com os campos do xml do Zoom, caso queira um
+	                    valor diferente, informe o código do atributo no campo de texto que deseja alterar, os atributos abaixo aceitam
+	                    apenas atributos do tipo text, exceto o campo de texto Marca. <a style="color:#FC9548" href="http://az2009.com/feedgoogleshopping/index/feedzoom" target="_blank"><strong>Gerar o Feed</strong></a>]]></comment>
+
+                    	<fields>
+                   			
+                   			<feedzoom_id translate="label">
+                    			<label>Codigo</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "codigo"]]>  </comment>
+						    </feedzoom_id>
+						    
+						    <feedzoom_nome translate="label">
+                    			<label>Nome</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "nome"]]>  </comment>
+						    </feedzoom_nome>
+						    
+						    <feedzoom_description translate="label">
+                    			<label>Description</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "description"]]>  </comment>
+						    </feedzoom_description>
+						    
+						    <feedzoom_preco_de translate="label">
+                    			<label>Preço De:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "preco_de"]]>  </comment>
+						    </feedzoom_preco_de>
+						    
+						    <feedzoom_preco translate="label">
+                    			<label>Preço:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "preco"]]>  </comment>
+						    </feedzoom_preco>
+						    
+						    <feedzoom_nparcela translate="label">
+                    			<label>Número de parcelas:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "nparcela"]]>  </comment>
+						    </feedzoom_nparcela>
+						    
+						    <feedzoom_vparcela_juros translate="label">
+                    			<label>Juros das parcelas:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Calculo "(preco + (preco * Juros das parcelas) /100))/Número de parcelas  "]]></comment>
+						    </feedzoom_vparcela_juros>
+						    
+						    <feedzoom_url translate="label">
+                    			<label>URL:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "url"]]>  </comment>
+						    </feedzoom_url>
+						    
+						    <feedzoom_url_imagem translate="label">
+                    			<label>URL Imagem:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "url_imagem"]]>  </comment>
+						    </feedzoom_url_imagem>
+						    
+						    <feedzoom_marca translate="label">
+                    			<label>Marca:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "marca"]]>  </comment>
+						    </feedzoom_marca>
+						    
+						    <feedzoom_cat translate="label">
+                    			<label>Categoria:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "departamento" e "subdepartamento" os valor tem que ser informado ]]>  </comment>
+						    </feedzoom_cat>
+						    
+						    <feedzoom_sku translate="label">
+                    			<label>Sku:</label>
+                    			<frontend_type>text</frontend_type>
+						        <sort_order>40</sort_order>
+						        <show_in_default>1</show_in_default>
+						        <show_in_website>1</show_in_website>
+						        <show_in_store>1</show_in_store>
+						        <comment><![CDATA[Referente a tag "sku"]]></comment>
+						    </feedzoom_sku>
+						    
+                    	</fields>
+                    	
+            		</feedzoom_attributes>
+            		
+            	</groups>
+		</feedgoogleshopping_config>
+	</sections>
+</config>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

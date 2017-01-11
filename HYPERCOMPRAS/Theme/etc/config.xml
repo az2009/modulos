@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<HC_Theme>
+			<version>0.1.0</version>
+		</HC_Theme>
+	</modules>
+
+	 <frontend>
+	    <routers>
+	      <hc_theme>
+	        <use>standard</use>
+	        <args>
+	          <module>HC_Theme</module>
+	          <frontName>hctheme</frontName>
+	        </args>
+	      </hc_theme>
+	    </routers>
+    </frontend>
+     <adminhtml>
+    	<events>
+    	
+	        <core_block_abstract_to_html_before>
+	            <observers>
+	                <hctheme_gridextend_core_block_abstract_to_html_before>
+	                    <class>hc_theme/observer</class>
+	                    <method>coreBlockAbstractToHtmlBefore</method>
+	                </hctheme_gridextend_core_block_abstract_to_html_before>
+	            </observers>
+	        </core_block_abstract_to_html_before>
+	        
+	        <sales_order_grid_collection_load_before>
+	            <observers>
+	                <hctheme_gridextend_sales_order_grid_collection_load_before>
+	                    <class>hc_theme/observer</class>
+	                    <method>salesOrderGridCollectionLoadBefore</method>
+	                </hctheme_gridextend_sales_order_grid_collection_load_before>
+	            </observers>
+	        </sales_order_grid_collection_load_before>
+	        
+	    </events>
+    </adminhtml>
+
+	<global>
+		<blocks>
+			<hc_theme>
+				<class>HC_Theme_Block</class>
+			</hc_theme>			
+		</blocks>
+
+		<helpers>
+			<hc_theme>
+				<class>HC_Theme_Helper</class>
+			</hc_theme>
+		</helpers>
+
+		<models>
+			<hc_theme>
+				<class>HC_Theme_Model</class>
+			</hc_theme>
+		</models>
+
+		<resources>
+
+			<hc_theme_setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</hc_theme_setup>
+
+			<hc_theme_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</hc_theme_write>
+
+			<hc_theme_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</hc_theme_read>
+
+			<hc_theme_setup>
+
+	            <setup>
+	              <module>HC_Theme</module>
+	              <class>Mage_Eav_Model_Entity_Setup</class>
+	            </setup>
+
+	            <connection>
+	              <use>default_setup</use>
+	            </connection>
+
+          </hc_theme_setup>
+
+		</resources>
+
+	</global>
+
+</config>

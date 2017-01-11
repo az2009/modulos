@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jbp_Giftlist>
+            <version>0.1.0</version>
+        </Jbp_Giftlist>
+    </modules>
+
+    <global>
+        <helpers>
+            <jbp_giftlist>
+                <class>Jbp_Giftlist_Helper</class>
+            </jbp_giftlist>
+        </helpers>
+        <blocks>
+            <jbp_giftlist>
+                <class>Jbp_Giftlist_Block</class>
+            </jbp_giftlist>
+
+            <firecheckout>
+            	<rewrite>
+            		<checkout_shipping>Jbp_Giftlist_Block_Checkout_Shipping</checkout_shipping>
+            	</rewrite>
+            </firecheckout>
+            
+            <adminhtml>
+            	<rewrite>
+            		<promo_quote_grid>Jbp_Giftlist_Block_Adminhtml_Promo_Quote_Grid</promo_quote_grid>            			
+            	</rewrite>
+            </adminhtml>
+            
+        </blocks>
+
+        <models>
+
+        	<jbp_giftlist>
+        		<class>Jbp_Giftlist_Model</class>
+        		<resourceModel>jbp_giftlist_mysql4</resourceModel>
+       		</jbp_giftlist>
+
+       		<jbp_giftlist_mysql4>
+
+       			<class>Jbp_Giftlist_Model_Mysql4</class>
+
+                <entities>
+                    <list>
+                        <table>jbpgiftlist_list</table>
+                    </list>
+                </entities>
+
+                <entities>
+                    <item>
+                        <table>jbpgiftlist_item</table>
+                    </item>
+                </entities>
+
+                <entities>
+                    <address>
+                        <table>jbpgiftlist_address_event</table>
+                    </address>
+                </entities>
+
+       		</jbp_giftlist_mysql4>
+
+        </models>
+		<template>
+            <email>
+                <jbp_giftlist_email_template_notify_ransomed translate="label" module="jbp_giftlist">
+                    <label>Email of notify ransomed gift </label>
+                    <file>jbp_giftlist/notify_ransomed.html</file>
+                    <type>html</type>
+                </jbp_giftlist_email_template_notify_ransomed>
+                <jbp_giftlist_email_template_msg_noivo translate="label" module="jbp_giftlist">
+                    <label>Send email of notify for groom </label>
+                    <file>jbp_giftlist/send_msg_groom.html</file>
+                    <type>html</type>
+                </jbp_giftlist_email_template_msg_noivo>
+            </email>
+        </template>
+        <resources>
+            <jbp_giftlist_setup>
+                <setup>
+                    <module>Jbp_Giftlist</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </jbp_giftlist_setup>
+
+            <jbp_giftlist_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </jbp_giftlist_write>
+
+            <jbp_giftlist_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </jbp_giftlist_read>
+        </resources>
+        <events>
+        	<!-- Verifica o carrinho  quando estiver na pagina de pagamento -->
+            <controller_action_predispatch_checkout_onepage_index>
+				<observers>
+					<jbp_giftlist_model_observer>
+						<type>singleton</type>
+						<class>jbp_giftlist/observer</class>
+						<method>holdCartEasypointsCheckout</method>
+					</jbp_giftlist_model_observer>
+				</observers>
+			</controller_action_predispatch_checkout_onepage_index>
+
+			<!-- Evento disparado ao pre carregar  o cart -->
+			<controller_action_layout_generate_blocks_before>
+				<observers>
+					<jbp_giftlist_model_observer>
+						<type>singleton</type>
+						<class>jbp_giftlist/observer</class>
+						<method>removeBlock</method>
+					</jbp_giftlist_model_observer>
+				</observers>
+			</controller_action_layout_generate_blocks_before>
+
+			<controller_action_predispatch_onestepcheckout_index_index>
+				<observers>
+					<jbp_giftlist_model_observer>
+						<type>singleton</type>
+						<class>jbp_giftlist/observer</class>
+						<method>holdCartEasypointsCheckout</method>
+					</jbp_giftlist_model_observer>
+				</observers>
+			</controller_action_predispatch_onestepcheckout_index_index>
+
+			<controller_action_predispatch_firecheckout_index_index>
+				<observers>
+					<jbp_giftlist_model_observer>
+						<type>singleton</type>
+						<class>jbp_giftlist/observer</class>
+						<method>holdCartEasypointsCheckout</method>
+					</jbp_giftlist_model_observer>
+				</observers>
+			</controller_action_predispatch_firecheckout_index_index>
+
+			<!-- Verifica o carrinho e o tipo de produto que esta sendo adicionado ao carrinho -->
+				<controller_action_predispatch_ajaxcartsuper_ajaxcart_add>
+	                <observers>
+						<jbp_giftlist_model_observer_add>
+							<type>singleton</type>
+							<class>jbp_giftlist/observer</class>
+							<method>holdCartEasypoints</method>
+						</jbp_giftlist_model_observer_add>
+					</observers>
+	            </controller_action_predispatch_ajaxcartsuper_ajaxcart_add>
+
+   				<controller_action_predispatch_checkout_cart_add>
+	                <observers>
+						<jbp_giftlist_model_observer_add>
+							<type>singleton</type>
+							<class>jbp_giftlist/observer</class>
+							<method>holdCartEasypoints</method>
+						</jbp_giftlist_model_observer_add>
+					</observers>
+	            </controller_action_predispatch_checkout_cart_add>
+
+			<!-- Verifica o carrinho e o tipo de produto que esta sendo adicionado ao carrinho -->
+				<checkout_controller_onepage_save_shipping_method_payment_check>
+	                <observers>
+						<jbp_giftlist_model_observer_check>
+							<type>singleton</type>
+							<class>jbp_giftlist/observer</class>
+							<method>checkPayment</method>
+						</jbp_giftlist_model_observer_check>
+					</observers>
+	            </checkout_controller_onepage_save_shipping_method_payment_check>
+
+            <!-- Seta o ID da lista de casamento antes de salvar o pedido -->
+	            <sales_order_save_before>
+	            	<observers>
+						<jbp_giftlist_model_observer_order>
+							<type>singleton</type>
+							<class>jbp_giftlist/observer</class>
+							<method>setIdListMarriageOrder</method>
+						</jbp_giftlist_model_observer_order>
+					</observers>
+	            </sales_order_save_before>
+        </events>
+
+    </global>
+    <adminhtml>
+    	 
+    	 <layout>
+	     	<updates>
+	     		<jbp_giftlist>
+	                <file>jbp/giftlist/jbp_giftlist_admin.xml</file>
+	     		</jbp_giftlist>
+	     	</updates>
+	     </layout>
+	     
+	     <events>
+	       <core_block_abstract_to_html_after>
+                <observers>
+                    <jbp_giftlist_sale_observers>
+                        <type>singleton</type>
+                        <class>jbp_giftlist/observer</class>
+                        <method>addOrderCustomBlock</method>
+                    </jbp_giftlist_sale_observers>
+                </observers>
+           </core_block_abstract_to_html_after>
+         </events>
+	     
+    </adminhtml>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<jbp_giftlist before="Mage_Adminhtml">Jbp_Giftlist_Adminhtml</jbp_giftlist>
+					</modules>						
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+    <frontend>
+    	<routers>
+            <giftlist>
+                <use>standard</use>
+                <args>
+                    <module>Jbp_Giftlist</module>
+                    <frontName>listaCasamento</frontName>
+                </args>
+            </giftlist>
+        </routers>
+        <layout>
+            <updates>
+                <jbp_giftlist>
+                    <file>jbp/jbp_giftlist.xml</file>
+                </jbp_giftlist>
+            </updates>
+        </layout>
+
+    </frontend>
+
+</config>
